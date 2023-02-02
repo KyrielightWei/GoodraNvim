@@ -1,0 +1,2 @@
+# GoodraNvim
+Neovim lua config
