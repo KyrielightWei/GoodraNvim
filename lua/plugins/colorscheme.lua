@@ -4,7 +4,7 @@ return {
         opt = {
 
         },
-        config = function ()
+        config = function()
             vim.g.gruvbox_material_better_performance = 1
         end,
     },

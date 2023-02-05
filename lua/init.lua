@@ -11,11 +11,25 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+local lazy_config = require("lazy_config")
+
+-- local plugin_path = lazy_config.get_plugin_path()
+
+-- vim.opt.rtp:prepend(plugin_path)
+vim.opt.rtp:append(require("lazy_config").plugin_path .. "/lspkind.nvim/")
+vim.opt.rtp:append(require("lazy_config").plugin_path .. "/nvim-cmp/")
+vim.opt.rtp:append(require("lazy_config").plugin_path .. "/cmp-nvim-lsp/")
+vim.opt.rtp:append(require("lazy_config").plugin_path .. "/nvim-lspconfig/")
+vim.opt.rtp:append(require("lazy_config").plugin_path .. "/telescope/")
+vim.opt.rtp:append(require("lazy_config").plugin_path .. "/plenary.nvim/")
+
 require("lazy").setup(
     {
+        "nvim-lua/plenary.nvim",
         -- require("plugins.common"),
-        require("plugins.colorschema"),
+        require("plugins.colorscheme"),
         -- require("plugins.ui"),
         require("plugins.lsp"),
+        require("plugins.ui"),
     },
-    require("lazy_config"))
+    lazy_config.get_config())
