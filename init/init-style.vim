@@ -56,7 +56,7 @@ set background=dark
 set termguicolors
 
 " 设置颜色主题，会在所有 runtimepaths 的 colors 目录寻找同名配置
-colorscheme gruvbox-material
+colorscheme catppuccin-macchiato
 
 "----------------------------------------------------------------------
 " 状态栏设置

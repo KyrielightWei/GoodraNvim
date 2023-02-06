@@ -9,4 +9,8 @@ return {
         end,
     },
     "sainnhe/everforest",
+    {
+        "catppuccin/nvim",
+        name = "catppuccin"
+    }
 }

@@ -22,10 +22,16 @@ vim.opt.rtp:append(require("lazy_config").plugin_path .. "/cmp-nvim-lsp/")
 vim.opt.rtp:append(require("lazy_config").plugin_path .. "/nvim-lspconfig/")
 vim.opt.rtp:append(require("lazy_config").plugin_path .. "/telescope/")
 vim.opt.rtp:append(require("lazy_config").plugin_path .. "/plenary.nvim/")
+vim.opt.rtp:append(require("lazy_config").plugin_path .. "/telescope-fzf-native.nvim/")
+vim.opt.rtp:append(require("lazy_config").plugin_path .. "/barbar.nvim/")
+vim.opt.rtp:append(require("lazy_config").plugin_path .. "/nvim-web-devicons/")
 
 require("lazy").setup(
     {
         "nvim-lua/plenary.nvim",
+        "skywind3000/asynctasks.vim",
+        "skywind3000/asyncrun.vim",
+        -- "kyazdani42/nvim-web-devicons",
         -- require("plugins.common"),
         require("plugins.colorscheme"),
         -- require("plugins.ui"),

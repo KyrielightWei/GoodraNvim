@@ -2,10 +2,10 @@ local M = {}
 local no_plugin = require("lazy_config").no_plugin_installed()
 
 function M.cmp_opt()
-    local cmp = require("cmp")
     if no_plugin then
         return nil
     else
+        local cmp = require("cmp")
         return {
             formatting = {
                 format = require('lspkind').cmp_format({
@@ -46,9 +46,9 @@ function M.cmp_opt()
 end
 
 function M.cmp_config(LazyPlugin, opt)
-    local cmp = require("cmp")
     if no_plugin then
     else
+        local cmp = require("cmp")
         cmp.setup(opt)
         cmp.setup.cmdline('/', {
             mapping =

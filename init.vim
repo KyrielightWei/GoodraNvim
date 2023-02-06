@@ -34,6 +34,11 @@ LoadScript init/init-tabsize.vim
 " 插件加载
 "  LoadScript init/init-plugins.vim
 lua require('init')
+nnoremap <silent> <leader>p :BufferPick<CR>
+nnoremap <C-n> :NvimTreeToggle<CR>:NvimTreeRefresh<CR>
+let g:asyncrun_open = 6
+let g:asynctasks_term_pos = 'tab'
+let g:asynctasks_term_reuse = 1
 nnoremap gd <cmd>lua require'telescope.builtin'.lsp_definitions{}<CR>
 nnoremap gr <cmd>lua require'telescope.builtin'.lsp_references{}<CR>
 nnoremap gD <cmd>lua require'telescope.builtin'.lsp_declaration{}<CR>

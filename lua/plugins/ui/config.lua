@@ -81,9 +81,9 @@ function M.lualine_opt(LazyPlugin)
 end
 
 function M.telescope_opt()
-    local actions = require('telescope.actions')
     if no_plugin then
     else
+        local actions = require('telescope.actions')
         return {
             --local opts = {noremap = true, slient = true}
             defaults = {
@@ -165,11 +165,11 @@ function M.telescope_opt()
                 -- }
                 -- please take a look at the readme of the extension you want to configure
                 fzf = {
-                fuzzy = true,                    -- false will only do exact matching
-                override_generic_sorter = true,  -- override the generic sorter
-                override_file_sorter = true,     -- override the file sorter
-                case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
-                                                 -- the default case_mode is "smart_case"
+                    fuzzy = true, -- false will only do exact matching
+                    override_generic_sorter = true, -- override the generic sorter
+                    override_file_sorter = true, -- override the file sorter
+                    case_mode = "smart_case", -- or "ignore_case" or "respect_case"
+                    -- the default case_mode is "smart_case"
                 },
                 -- file_browser = {
                 --   theme = "ivy",
@@ -184,15 +184,222 @@ function M.telescope_opt()
                 --       -- your custom normal mode mappings
                 --     },
                 --   },
-                },
-            }
+            },
         }
     end
 end
 
-function M.nvim_tree()
+function M.nvim_tree_opt()
+    if no_plugin then
+    else
+        return {
+            -- 关闭文件时自动关闭
+            open_on_tab = false,
+            open_on_setup = false,
+            disable_netrw = true,
+            respect_buf_cwd = true,
+            update_focused_file = {
+                enable      = true,
+                update_cwd  = false,
+                ignore_list = {}
+            },
+            -- 不显示 git 状态图标
+            git = {
+                enable = true,
+                ignore = false,
+                show_on_dirs = true,
+                timeout = 400,
+            },
+            view = {
+                mappings =
+                {
+                    custom_only = true,
+                    list = {
+                        { key = { "<CR>", "o", "<2-LeftMouse>" }, action = "edit" },
+                        { key = "<leader>e", action = "edit_in_place" },
+                        { key = { "O" }, action = "edit_no_picker" },
+                        { key = { "<2-RightMouse>", "<C-]>" }, action = "cd" },
+                        { key = "<leader>v", action = "vsplit" },
+                        { key = "<leader>x", action = "split" },
+                        { key = "<leader>t", action = "tabnew" },
+                        { key = "<", action = "prev_sibling" },
+                        { key = ">", action = "next_sibling" },
+                        { key = "P", action = "parent_node" },
+                        { key = "<BS>", action = "close_node" },
+                        { key = "<Tab>", action = "preview" },
+                        { key = "K", action = "first_sibling" },
+                        { key = "J", action = "last_sibling" },
+                        { key = "I", action = "toggle_git_ignored" },
+                        { key = "H", action = "toggle_dotfiles" },
+                        { key = "R", action = "refresh" },
+                        { key = "a", action = "create" },
+                        { key = "d", action = "remove" },
+                        { key = "D", action = "trash" },
+                        { key = "r", action = "rename" },
+                        { key = "<leader>r", action = "full_rename" },
+                        { key = "x", action = "cut" },
+                        { key = "c", action = "copy" },
+                        { key = "p", action = "paste" },
+                        { key = "y", action = "copy_name" },
+                        { key = "Y", action = "copy_path" },
+                        { key = "gy", action = "copy_absolute_path" },
+                        { key = "[c", action = "prev_git_item" },
+                        { key = "]c", action = "next_git_item" },
+                        { key = "-", action = "dir_up" },
+                        { key = "s", action = "system_open" },
+                        { key = "q", action = "close" },
+                        { key = "g?", action = "toggle_help" },
+                        { key = "W", action = "collapse_all" },
+                        { key = "S", action = "search_node" },
+                        { key = "<leader>k", action = "toggle_file_info" },
+                        { key = ".", action = "run_file_command" },
+                    }
+                },
+            },
+            renderer = {
+                add_trailing = false,
+                group_empty = false,
+                highlight_git = false,
+                full_name = false,
+                highlight_opened_files = "none",
+                root_folder_modifier = ":~",
+                indent_markers = {
+                    enable = false,
+                    icons = {
+                        corner = "└",
+                        edge = "│",
+                        item = "│",
+                        none = " ",
+                    },
+                },
+                icons = {
+                    webdev_colors = true,
+                    git_placement = "before",
+                    padding = " ",
+                    symlink_arrow = " ➛ ",
+                    show = {
+                        file = true,
+                        folder = true,
+                        folder_arrow = true,
+                        git = true,
+                    },
+                    glyphs = {
+                        default = "",
+                        symlink = "",
+                        bookmark = "",
+                        folder = {
+                            arrow_closed = "",
+                            arrow_open = "",
+                            default = "",
+                            open = "",
+                            empty = "",
+                            empty_open = "",
+                            symlink = "",
+                            symlink_open = "",
+                        },
+                        git = {
+                            unstaged = "✗",
+                            staged = "✓",
+                            unmerged = "",
+                            renamed = "➜",
+                            untracked = "★",
+                            deleted = "",
+                            ignored = "◌",
+                        },
+                    },
+                },
+                special_files = { "Cargo.toml", "Makefile", "README.md", "readme.md" },
+                symlink_destination = true,
+            },
+        }
+    end
+end
 
+function M.telescope_fzf_config(LazyPlugin, opts)
+    if no_plugin then
+    else
+        -- require("telescope").setup(opts)
+        require('telescope').load_extension('fzf')
+    end
+end
 
+function M.barbar_opts()
+    if no_plugin then
+    else
+        return {
+            -- Enable/disable animations
+            animation = true,
+
+            -- Enable/disable auto-hiding the tab bar when there is a single buffer
+            auto_hide = false,
+
+            -- Enable/disable current/total tabpages indicator (top right corner)
+            tabpages = true,
+
+            -- Enable/disable close button
+            closable = true,
+
+            -- Enables/disable clickable tabs
+            --  - left-click: go to buffer
+            --  - middle-click: delete buffer
+            clickable = true,
+
+            -- Excludes buffers from the tabline
+            exclude_ft = { 'javascript' },
+            exclude_name = { 'package.json' },
+
+            -- Enable/disable icons
+            -- if set to 'numbers', will show buffer index in the tabline
+            -- if set to 'both', will show buffer index and icons in the tabline
+            icons = true,
+
+            -- If set, the icon color will follow its corresponding buffer
+            -- highlight group. By default, the Buffer*Icon group is linked to the
+            -- Buffer* group (see Highlighting below). Otherwise, it will take its
+            -- default value as defined by devicons.
+            icon_custom_colors = false,
+
+            -- Configure icons on the bufferline.
+            icon_separator_active = '▎',
+            icon_separator_inactive = '▎',
+            icon_close_tab = '',
+            icon_close_tab_modified = '●',
+            icon_pinned = '車',
+
+            -- If true, new buffers will be inserted at the start/end of the list.
+            -- Default is to insert after current buffer.
+            insert_at_end = false,
+            insert_at_start = false,
+
+            -- Sets the maximum padding width with which to surround each tab
+            maximum_padding = 1,
+
+            -- Sets the maximum buffer name length.
+            maximum_length = 30,
+
+            -- If set, the letters for each buffer in buffer-pick mode will be
+            -- assigned based on their name. Otherwise or in case all letters are
+            -- already assigned, the behavior is to assign letters in order of
+            -- usability (see order below)
+            semantic_letters = true,
+
+            -- New buffer letters are assigned in this order. This order is
+            -- optimal for the qwerty keyboard layout but might need adjustement
+            -- for other layouts.
+            letters = 'asdfjkl;ghnmxcvbziowerutyqpASDFJKLGHNMXCVBZIOWERUTYQP',
+
+            -- Sets the name of unnamed buffers. By default format is "[Buffer X]"
+            -- where X is the buffer number. But only a static string is accepted here.
+            no_name_title = nil,
+        }
+    end
+end
+
+function M.barbar_config(LazyPlugin, opts)
+    if no_plugin then
+    else
+        require 'bufferline'.setup(opts)
+    end
 end
 
 return M
