@@ -25,12 +25,13 @@ vim.opt.rtp:append(require("lazy_config").plugin_path .. "/plenary.nvim/")
 vim.opt.rtp:append(require("lazy_config").plugin_path .. "/telescope-fzf-native.nvim/")
 vim.opt.rtp:append(require("lazy_config").plugin_path .. "/barbar.nvim/")
 vim.opt.rtp:append(require("lazy_config").plugin_path .. "/nvim-web-devicons/")
-
+vim.opt.rtp:append(require("lazy_config").plugin_path .. "/formatter.nvim/")
 require("lazy").setup(
     {
         "nvim-lua/plenary.nvim",
         "skywind3000/asynctasks.vim",
         "skywind3000/asyncrun.vim",
+        "numToStr/Comment.nvim",
         -- "kyazdani42/nvim-web-devicons",
         -- require("plugins.common"),
         require("plugins.colorscheme"),

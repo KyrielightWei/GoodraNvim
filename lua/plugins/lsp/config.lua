@@ -350,4 +350,102 @@ function M.lspconfig_config(LazyPlugin, opts)
     end
 end
 
+function M.formatter_opts()
+    if no_plugin then
+    else
+        local util = require "formatter.util"
+        return {
+            -- Enable or disable logging
+            logging = false,
+            -- Set the log level
+            log_level = vim.log.levels.WARN,
+            -- All formatter configurations are opt-in
+            filetype = {
+                cpp = {
+                    require("formatter.filetypes.cpp").clangformat,
+                    function()
+                        return {
+                            exe = "clangformat",
+                            arg = { "--style=",
+                                "\"{",
+                                " BasedOnStyle: LLVM,",
+                                " AccessModifierOffset: -2,",
+                                " AlignEscapedNewlines: Left,",
+                                " AlignOperands : true,",
+                                " AlwaysBreakTemplateDeclarations: true,",
+                                " BinPackArguments: true,",
+                                " BinPackParameters: false,",
+                                " BreakBeforeBinaryOperators: NonAssignment,",
+                                " Standard: Auto,",
+                                " IndentWidth: 2,",
+                                " BreakBeforeBraces: Custom,",
+                                " BraceWrapping:",
+                                "    {AfterClass:      true,",
+                                "    AfterControlStatement: false,",
+                                "    AfterEnum:       true,",
+                                "    AfterFunction:   true,",
+                                "    AfterNamespace:  true,",
+                                "    AfterObjCDeclaration: false,",
+                                "    AfterStruct:     true,",
+                                "    AfterUnion:      true,",
+                                "    AfterExternBlock: true,",
+                                "    BeforeCatch:     false,",
+                                "    BeforeElse:      false,",
+                                "    IndentBraces:    false,",
+                                "    SplitEmptyFunction: false,",
+                                "    SplitEmptyRecord: false,",
+                                "    SplitEmptyNamespace: false},",
+                                " ColumnLimit: 100,",
+                                " AllowAllParametersOfDeclarationOnNextLine: false,",
+                                " AlignAfterOpenBracket: true}\"",
+                                "-assume-filename",
+                                util.escape_path(util.get_current_buffer_file_name()),
+                            },
+                            stdin = true,
+                        }
+                    end
+                }
+            },
+            -- Formatter configurations for filetype "lua" go here
+            -- and will be executed in order
+            lua = {
+                -- "formatter.filetypes.lua" defines default configurations for the
+                -- "lua" filetype
+                require("formatter.filetypes.lua").stylua,
+
+                -- You can also define your own configuration
+                function()
+                    -- Supports conditional formatting
+                    if util.get_current_buffer_file_name() == "special.lua" then
+                        return nil
+                    end
+
+                    -- Full specification of configurations is down below and in Vim help
+                    -- files
+                    return {
+                        exe = "stylua",
+                        args = {
+                            "--search-parent-directories",
+                            "--stdin-filepath",
+                            util.escape_path(util.get_current_buffer_file_path()),
+                            "--",
+                            "-",
+                        },
+                        stdin = true,
+                    }
+                end
+            },
+
+            -- Use the special "*" filetype for defining formatter configurations on
+            -- any filetype
+            ["*"] = {
+                -- "formatter.filetypes.any" defines default configurations for any
+                -- filetype
+                require("formatter.filetypes.any").remove_trailing_whitespace
+            }
+        }
+    end
+
+end
+
 return M

@@ -92,4 +92,9 @@ return {
     -- },
     config = require("plugins.lsp.config").lspconfig_config(LazyPlugin, opts)
   },
+
+  {
+    "mhartington/formatter.nvim",
+    opts = require("plugins.lsp.config").formatter_opts()
+  },
 }
