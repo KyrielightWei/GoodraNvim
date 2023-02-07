@@ -54,7 +54,7 @@ M.icons = {
 }
 
 function M.no_plugin_installed()
-  -- return true;
+--   return true;
   return false;
 end
 
@@ -215,7 +215,7 @@ end
 function M.treesitter_config(LazyPlugin, opts)
   if M.no_plugin_installed() then
   else
-    require 'nvim-treesitter.configs'.setup {
+    require 'nvim-treesitter.configs'.setup ({
         -- One of "all", "maintained" (parsers with maintainers), or a list of languages
         -- ensure_installed = "maintained",
         ensure_installed = { "c", "cpp", "bash" },
@@ -259,7 +259,7 @@ function M.treesitter_config(LazyPlugin, opts)
             -- colors = {}, -- table of hex strings
             -- termcolors = {} -- table of colour name strings
         }
-    }
+    })
   end
 end
 

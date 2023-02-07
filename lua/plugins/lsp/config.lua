@@ -227,9 +227,8 @@ end
 function M.lspconfig_config(LazyPlugin, opts)
     if (no_plugin)
     then
-        return true
     else
-        require('lspconfig').ccls.setup {
+        require('lspconfig').ccls.setup({
             on_attach = function(client, bufnr)
                 local map_opts = { noremap = true, silent = true }
                 vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>k', '<cmd>lua vim.lsp.buf.signature_help()<CR>',
@@ -345,7 +344,7 @@ function M.lspconfig_config(LazyPlugin, opts)
                     maxNum = 2000
                 }
             }
-        }
+        })
     end
 end
 
