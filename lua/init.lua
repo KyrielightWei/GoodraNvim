@@ -26,12 +26,25 @@ vim.opt.rtp:append(require("lazy_config").plugin_path .. "/telescope-fzf-native.
 vim.opt.rtp:append(require("lazy_config").plugin_path .. "/barbar.nvim/")
 vim.opt.rtp:append(require("lazy_config").plugin_path .. "/nvim-web-devicons/")
 vim.opt.rtp:append(require("lazy_config").plugin_path .. "/formatter.nvim/")
+vim.opt.rtp:append(require("lazy_config").plugin_path .. "/nvim-treesitter/")
+
 require("lazy").setup(
     {
         "nvim-lua/plenary.nvim",
         "skywind3000/asynctasks.vim",
         "skywind3000/asyncrun.vim",
+        "mrjones2014/nvim-ts-rainbow",
+        "sbdchd/neoformat",
         "numToStr/Comment.nvim",
+        {
+            "nvim-treesitter/nvim-treesitter",
+             build = ':TSUpdate',
+             dependencies = {
+                "mrjones2014/nvim-ts-rainbow"
+             },
+             config = require("lazy_config").treesitter_config(lazy_config, opts)
+        },
+        -- "luochen1990/rainbow",
         -- "kyazdani42/nvim-web-devicons",
         -- require("plugins.common"),
         require("plugins.colorscheme"),

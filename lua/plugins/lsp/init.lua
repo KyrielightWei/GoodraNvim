@@ -70,10 +70,8 @@ return {
   "hrsh7th/cmp-nvim-lsp-signature-help",
   { "hrsh7th/nvim-cmp",
     dependencies = { "onsails/lspkind.nvim" },
-    opts = {
-      require("plugins.lsp.config").cmp_opt(),
-    },
-    config = require("plugins.lsp.config").cmp_config()
+    opts = require("plugins.lsp.config").cmp_opt(),
+    config = require("plugins.lsp.config").cmp_config(LazyPlugin, opts)
   },
 
   { "neovim/nvim-lspconfig"

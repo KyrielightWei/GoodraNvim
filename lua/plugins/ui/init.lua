@@ -35,6 +35,17 @@ return {
         },
         opts = require("plugins.ui.config").barbar_opts(),
         config = require("plugins.ui.config").barbar_config(lazy_config, opts)
+    },
+
+    {
+        "lewis6991/gitsigns.nvim",
+        opts = require("plugins.ui.config").git_sign_opt()
+    },
+
+    {
+        "haringsrob/nvim_context_vt",
+        opts = require("plugins.ui.config").nvim_context_vt_opt()
     }
+
 
 }

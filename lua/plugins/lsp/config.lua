@@ -13,9 +13,9 @@ function M.cmp_opt()
                 })
             },
             mapping = {
-                ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
+                ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs( -4), { 'i', 'c' }),
                 ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
-                ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
+                ['<C-o>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
                 -- ['<C-y>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
                 ['<Tab>'] = function(fallback)
                     if cmp.visible() then
@@ -40,16 +40,15 @@ function M.cmp_opt()
                 { name = 'treesitter' },
                 { name = 'nvim_lsp_signature_help' },
             }),
-
         }
     end
 end
 
-function M.cmp_config(LazyPlugin, opt)
+function M.cmp_config(LazyPlugin, opts)
     if no_plugin then
     else
         local cmp = require("cmp")
-        cmp.setup(opt)
+        cmp.setup(opts)
         cmp.setup.cmdline('/', {
             mapping =
             {
@@ -236,11 +235,11 @@ function M.lspconfig_config(LazyPlugin, opts)
                 vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>k', '<cmd>lua vim.lsp.buf.signature_help()<CR>',
                     map_opts)
                 vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', map_opts)
-            end;
-            capabilities = { require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities()) },
-            cmd = { "ccls" };
-            filetypes = { "c", "cpp", "ipp", "cuda", "ic", "objc", "objcpp" };
-            root_dir = require("lspconfig.util").root_pattern("compile_commands.json", ".ccls", ".git", ".svn");
+            end,
+            capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities()),
+            cmd = { "ccls" },
+            filetypes = { "c", "cpp", "ipp", "cuda", "ic", "objc", "objcpp" },
+            root_dir = require("lspconfig.util").root_pattern("compile_commands.json", ".ccls", ".git", ".svn"),
             init_options = {
                 compilationDatabaseCommand = "",
                 compilationDatabaseDirectory = "",
@@ -362,10 +361,10 @@ function M.formatter_opts()
             -- All formatter configurations are opt-in
             filetype = {
                 cpp = {
-                    require("formatter.filetypes.cpp").clangformat,
+                    -- require("formatter.filetypes.cpp").clangformat,
                     function()
                         return {
-                            exe = "clangformat",
+                            exe = "clang-format",
                             arg = { "--style=",
                                 "\"{",
                                 " BasedOnStyle: LLVM,",
@@ -398,54 +397,54 @@ function M.formatter_opts()
                                 " ColumnLimit: 100,",
                                 " AllowAllParametersOfDeclarationOnNextLine: false,",
                                 " AlignAfterOpenBracket: true}\"",
-                                "-assume-filename",
-                                util.escape_path(util.get_current_buffer_file_name()),
+                                -- "-assume-filename",
+                                -- util.escape_path(util.get_current_buffer_file_name()),
                             },
                             stdin = true,
                         }
                     end
+                },
+                c = cpp,
+                -- Formatter configurations for filetype "lua" go here
+                -- and will be executed in order
+                lua = {
+                    -- "formatter.filetypes.lua" defines default configurations for the
+                    -- "lua" filetype
+                    require("formatter.filetypes.lua").stylua,
+
+                    -- You can also define your own configuration
+                    function()
+                        -- Supports conditional formatting
+                        if util.get_current_buffer_file_name() == "special.lua" then
+                            return nil
+                        end
+
+                        -- Full specification of configurations is down below and in Vim help
+                        -- files
+                        return {
+                            exe = "stylua",
+                            args = {
+                                "--search-parent-directories",
+                                "--stdin-filepath",
+                                util.escape_path(util.get_current_buffer_file_path()),
+                                "--",
+                                "-",
+                            },
+                            stdin = true,
+                        }
+                    end
+                },
+
+                -- Use the special "*" filetype for defining formatter configurations on
+                -- any filetype
+                ["*"] = {
+                    -- "formatter.filetypes.any" defines default configurations for any
+                    -- filetype
+                    require("formatter.filetypes.any").remove_trailing_whitespace
                 }
             },
-            -- Formatter configurations for filetype "lua" go here
-            -- and will be executed in order
-            lua = {
-                -- "formatter.filetypes.lua" defines default configurations for the
-                -- "lua" filetype
-                require("formatter.filetypes.lua").stylua,
-
-                -- You can also define your own configuration
-                function()
-                    -- Supports conditional formatting
-                    if util.get_current_buffer_file_name() == "special.lua" then
-                        return nil
-                    end
-
-                    -- Full specification of configurations is down below and in Vim help
-                    -- files
-                    return {
-                        exe = "stylua",
-                        args = {
-                            "--search-parent-directories",
-                            "--stdin-filepath",
-                            util.escape_path(util.get_current_buffer_file_path()),
-                            "--",
-                            "-",
-                        },
-                        stdin = true,
-                    }
-                end
-            },
-
-            -- Use the special "*" filetype for defining formatter configurations on
-            -- any filetype
-            ["*"] = {
-                -- "formatter.filetypes.any" defines default configurations for any
-                -- filetype
-                require("formatter.filetypes.any").remove_trailing_whitespace
-            }
         }
     end
-
 end
 
 return M
