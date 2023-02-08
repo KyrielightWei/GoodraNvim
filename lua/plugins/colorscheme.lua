@@ -16,6 +16,12 @@ return {
                 nvimtree = true,
                 telescope = true,
                 ts_rainbow = true,
+                native_lsp = {
+                    enabled = true,
+                },
+                lsp_trouble = true,
+
+
                 -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
             },
         }
