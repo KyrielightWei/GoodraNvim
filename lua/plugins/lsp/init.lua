@@ -59,7 +59,13 @@ return {
       require("lspkind").init(opts)
     end
   },
-
+  {
+    "L3MON4D3/LuaSnip",
+    -- follow latest release.
+	  version = "<CurrentMajor>.*",
+	  -- install jsregexp (optional!).
+	  build = "make install_jsregexp"
+  },
   "hrsh7th/cmp-nvim-lsp",
   "hrsh7th/cmp-buffer",
   "hrsh7th/cmp-path",

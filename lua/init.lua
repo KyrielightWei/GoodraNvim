@@ -34,8 +34,14 @@ require("lazy").setup(
         "skywind3000/asynctasks.vim",
         "skywind3000/asyncrun.vim",
         "mrjones2014/nvim-ts-rainbow",
+        "tpope/vim-fugitive",
         "sbdchd/neoformat",
-        "numToStr/Comment.nvim",
+        {
+            "numToStr/Comment.nvim",
+            config = function (lazy_plugin, opts)
+                require('Comment').setup()
+            end
+        },
         {
             "nvim-treesitter/nvim-treesitter",
              build = ':TSUpdate',

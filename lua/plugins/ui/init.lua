@@ -45,7 +45,10 @@ return {
     {
         "haringsrob/nvim_context_vt",
         opts = require("plugins.ui.config").nvim_context_vt_opt()
+    },
+
+    {
+        "folke/trouble.nvim",
+        dependencies = {"nvim-tree/nvim-web-devicons"},
     }
-
-
 }
