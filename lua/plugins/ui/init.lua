@@ -49,6 +49,15 @@ return {
 
     {
         "folke/trouble.nvim",
-        dependencies = {"nvim-tree/nvim-web-devicons"},
+        dependencies = { "nvim-tree/nvim-web-devicons" },
+    },
+
+    {
+        "glepnir/dashboard-nvim",
+        event = 'VimEnter',
+        config =
+        require("plugins.ui.config").dashboard_config()
+        ,
+        dependencies = { { 'nvim-tree/nvim-web-devicons' } }
     }
 }

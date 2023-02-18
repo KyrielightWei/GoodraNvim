@@ -27,28 +27,35 @@ vim.opt.rtp:append(require("lazy_config").plugin_path .. "/barbar.nvim/")
 vim.opt.rtp:append(require("lazy_config").plugin_path .. "/nvim-web-devicons/")
 vim.opt.rtp:append(require("lazy_config").plugin_path .. "/formatter.nvim/")
 vim.opt.rtp:append(require("lazy_config").plugin_path .. "/nvim-treesitter/")
+vim.opt.rtp:append(require("lazy_config").plugin_path .. "/dashboard-nvim/")
+vim.opt.rtp:append(require("lazy_config").plugin_path .. "/hop.nvim/")
 
 require("lazy").setup(
     {
         "nvim-lua/plenary.nvim",
         "skywind3000/asynctasks.vim",
         "skywind3000/asyncrun.vim",
+        {
+            "phaazon/hop.nvim",
+            config = require("hop").setup()
+        },
+        "akinsho/toggleterm.nvim",
         "mrjones2014/nvim-ts-rainbow",
         "tpope/vim-fugitive",
         "sbdchd/neoformat",
         {
             "numToStr/Comment.nvim",
-            config = function (lazy_plugin, opts)
+            config = function(lazy_plugin, opts)
                 require('Comment').setup()
             end
         },
         {
             "nvim-treesitter/nvim-treesitter",
-             build = ':TSUpdate',
-             dependencies = {
+            build = ':TSUpdate',
+            dependencies = {
                 "mrjones2014/nvim-ts-rainbow"
-             },
-             config = require("lazy_config").treesitter_config(lazy_config, opts)
+            },
+            config = require("lazy_config").treesitter_config(lazy_config, opts)
         },
         -- "luochen1990/rainbow",
         -- "kyazdani42/nvim-web-devicons",

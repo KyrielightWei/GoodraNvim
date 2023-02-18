@@ -62,9 +62,9 @@ return {
   {
     "L3MON4D3/LuaSnip",
     -- follow latest release.
-	  version = "<CurrentMajor>.*",
-	  -- install jsregexp (optional!).
-	  build = "make install_jsregexp"
+    version = "<CurrentMajor>.*",
+    -- install jsregexp (optional!).
+    build = "make install_jsregexp"
   },
   "hrsh7th/cmp-nvim-lsp",
   "hrsh7th/cmp-buffer",
@@ -98,7 +98,44 @@ return {
   },
 
   {
-    "mhartington/formatter.nvim",
-    opts = require("plugins.lsp.config").formatter_opts()
+    "SmiteshP/nvim-navic",
+    lazy = true,
+    -- init = function()
+    -- end,
+    opts = function()
+      return {
+        separator = " ",
+        highlight = true,
+        depth_limit = 5,
+        icons = {
+          File          = " ",
+          Module        = " ",
+          Namespace     = " ",
+          Package       = " ",
+          Class         = " ",
+          Method        = " ",
+          Property      = " ",
+          Field         = " ",
+          Constructor   = " ",
+          Enum          = "練",
+          Interface     = "練",
+          Function      = " ",
+          Variable      = " ",
+          Constant      = " ",
+          String        = " ",
+          Number        = " ",
+          Boolean       = "◩ ",
+          Array         = " ",
+          Object        = " ",
+          Key           = " ",
+          Null          = "ﳠ ",
+          EnumMember    = " ",
+          Struct        = " ",
+          Event         = " ",
+          Operator      = " ",
+          TypeParameter = " ",
+        },
+      }
+    end
   },
 }

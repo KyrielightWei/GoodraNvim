@@ -33,8 +33,8 @@ function M.lualine_opt(LazyPlugin)
                             hint = icons.diagnostics.Hint,
                         },
                     },
-                    { "filetype", icon_only = true, separator = "",                                               padding = { left = 1, right = 0 } },
-                    { "filename", path = 1,         symbols = { modified = "  ", readonly = "", unnamed = "" } },
+                    { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
+                    { "filename", path = 1, symbols = { modified = "  ", readonly = "", unnamed = "" } },
                     -- stylua: ignore
                     -- {
                     --   function() return require("nvim-navic").get_location() end,
@@ -66,7 +66,7 @@ function M.lualine_opt(LazyPlugin)
                     },
                 },
                 lualine_y = {
-                    { "progress", separator = "",                   padding = { left = 1, right = 0 } },
+                    { "progress", separator = "", padding = { left = 1, right = 0 } },
                     { "location", padding = { left = 0, right = 1 } },
                 },
                 lualine_z = {
@@ -74,6 +74,31 @@ function M.lualine_opt(LazyPlugin)
                         return " " .. os.date("%R")
                     end,
                 },
+            },
+            winbar = {
+                lualine_a = {
+                    { 'filename',
+                        path = 1, }
+                },
+                lualine_b = {
+                    {
+                        function() return require("nvim-navic").get_location() end,
+                        cond = function() return package.loaded["nvim-navic"] and require("nvim-navic").is_available() end
+                    }
+                },
+                lualine_c = {
+                },
+                lualine_x = {},
+                lualine_y = {},
+                lualine_z = {}
+            },
+            inactive_winbar = {
+                lualine_a = {},
+                lualine_b = {},
+                lualine_c = { 'filename' },
+                lualine_x = {},
+                lualine_y = {},
+                lualine_z = {}
             },
             extensions = { "neo-tree" },
         }
@@ -216,43 +241,43 @@ function M.nvim_tree_opt()
                     custom_only = true,
                     list = {
                         { key = { "<CR>", "o", "<2-LeftMouse>" }, action = "edit" },
-                        { key = "<leader>e",                      action = "edit_in_place" },
-                        { key = { "O" },                          action = "edit_no_picker" },
-                        { key = { "<2-RightMouse>", "<C-]>" },    action = "cd" },
-                        { key = "<leader>v",                      action = "vsplit" },
-                        { key = "<leader>x",                      action = "split" },
-                        { key = "<leader>t",                      action = "tabnew" },
-                        { key = "<",                              action = "prev_sibling" },
-                        { key = ">",                              action = "next_sibling" },
-                        { key = "P",                              action = "parent_node" },
-                        { key = "<BS>",                           action = "close_node" },
-                        { key = "<Tab>",                          action = "preview" },
-                        { key = "K",                              action = "first_sibling" },
-                        { key = "J",                              action = "last_sibling" },
-                        { key = "I",                              action = "toggle_git_ignored" },
-                        { key = "H",                              action = "toggle_dotfiles" },
-                        { key = "R",                              action = "refresh" },
-                        { key = "a",                              action = "create" },
-                        { key = "d",                              action = "remove" },
-                        { key = "D",                              action = "trash" },
-                        { key = "r",                              action = "rename" },
-                        { key = "<leader>r",                      action = "full_rename" },
-                        { key = "x",                              action = "cut" },
-                        { key = "c",                              action = "copy" },
-                        { key = "p",                              action = "paste" },
-                        { key = "y",                              action = "copy_name" },
-                        { key = "Y",                              action = "copy_path" },
-                        { key = "gy",                             action = "copy_absolute_path" },
-                        { key = "[c",                             action = "prev_git_item" },
-                        { key = "]c",                             action = "next_git_item" },
-                        { key = "-",                              action = "dir_up" },
-                        { key = "s",                              action = "system_open" },
-                        { key = "q",                              action = "close" },
-                        { key = "g?",                             action = "toggle_help" },
-                        { key = "W",                              action = "collapse_all" },
-                        { key = "S",                              action = "search_node" },
-                        { key = "<leader>k",                      action = "toggle_file_info" },
-                        { key = ".",                              action = "run_file_command" },
+                        { key = "<leader>e", action = "edit_in_place" },
+                        { key = { "O" }, action = "edit_no_picker" },
+                        { key = { "<2-RightMouse>", "<C-]>" }, action = "cd" },
+                        { key = "<leader>v", action = "vsplit" },
+                        { key = "<leader>x", action = "split" },
+                        { key = "<leader>t", action = "tabnew" },
+                        { key = "<", action = "prev_sibling" },
+                        { key = ">", action = "next_sibling" },
+                        { key = "P", action = "parent_node" },
+                        { key = "<BS>", action = "close_node" },
+                        { key = "<Tab>", action = "preview" },
+                        { key = "K", action = "first_sibling" },
+                        { key = "J", action = "last_sibling" },
+                        { key = "I", action = "toggle_git_ignored" },
+                        { key = "H", action = "toggle_dotfiles" },
+                        { key = "R", action = "refresh" },
+                        { key = "a", action = "create" },
+                        { key = "d", action = "remove" },
+                        { key = "D", action = "trash" },
+                        { key = "r", action = "rename" },
+                        { key = "<leader>r", action = "full_rename" },
+                        { key = "x", action = "cut" },
+                        { key = "c", action = "copy" },
+                        { key = "p", action = "paste" },
+                        { key = "y", action = "copy_name" },
+                        { key = "Y", action = "copy_path" },
+                        { key = "gy", action = "copy_absolute_path" },
+                        { key = "[c", action = "prev_git_item" },
+                        { key = "]c", action = "next_git_item" },
+                        { key = "-", action = "dir_up" },
+                        { key = "s", action = "system_open" },
+                        { key = "q", action = "close" },
+                        { key = "g?", action = "toggle_help" },
+                        { key = "W", action = "collapse_all" },
+                        { key = "S", action = "search_node" },
+                        { key = "<leader>k", action = "toggle_file_info" },
+                        { key = ".", action = "run_file_command" },
                     }
                 },
             },
@@ -403,10 +428,14 @@ function M.git_sign_opt()
         return {
             signs                        = {
                 add          = { hl = 'GitSignsAdd', text = '│', numhl = 'GitSignsAddNr', linehl = 'GitSignsAddLn' },
-                change       = { hl = 'GitSignsChange', text = '│', numhl = 'GitSignsChangeNr', linehl = 'GitSignsChangeLn' },
-                delete       = { hl = 'GitSignsDelete', text = '_', numhl = 'GitSignsDeleteNr', linehl = 'GitSignsDeleteLn' },
-                topdelete    = { hl = 'GitSignsDelete', text = '‾', numhl = 'GitSignsDeleteNr', linehl = 'GitSignsDeleteLn' },
-                changedelete = { hl = 'GitSignsChange', text = '~', numhl = 'GitSignsChangeNr', linehl = 'GitSignsChangeLn' },
+                change       = { hl = 'GitSignsChange', text = '│', numhl = 'GitSignsChangeNr',
+                    linehl = 'GitSignsChangeLn' },
+                delete       = { hl = 'GitSignsDelete', text = '_', numhl = 'GitSignsDeleteNr',
+                    linehl = 'GitSignsDeleteLn' },
+                topdelete    = { hl = 'GitSignsDelete', text = '‾', numhl = 'GitSignsDeleteNr',
+                    linehl = 'GitSignsDeleteLn' },
+                changedelete = { hl = 'GitSignsChange', text = '~', numhl = 'GitSignsChangeNr',
+                    linehl = 'GitSignsChangeLn' },
             },
             signcolumn                   = true, -- Toggle with `:Gitsigns toggle_signs`
             numhl                        = true, -- Toggle with `:Gitsigns toggle_numhl`
@@ -508,6 +537,51 @@ function M.nvim_context_vt_opt()
             --   -- By default the last node is used
             --   return nodes[#nodes]
             -- end,
+        }
+    end
+end
+
+function M.dashboard_config()
+    if no_plugin then
+    else
+        require('dashboard').setup {
+            theme = 'hyper', --  theme is doom and hyper default is hyper
+            config = {
+
+                header =
+                {
+                    '',
+                    '',
+                    '        ⢀⣴⡾⠃⠄⠄⠄⠄⠄⠈⠺⠟⠛⠛⠛⠛⠻⢿⣿⣿⣿⣿⣶⣤⡀  ',
+                    '      ⢀⣴⣿⡿⠁⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⣸⣿⣿⣿⣿⣿⣿⣿⣷ ',
+                    '     ⣴⣿⡿⡟⡼⢹⣷⢲⡶⣖⣾⣶⢄⠄⠄⠄⠄⠄⢀⣼⣿⢿⣿⣿⣿⣿⣿⣿⣿ ',
+                    '    ⣾⣿⡟⣾⡸⢠⡿⢳⡿⠍⣼⣿⢏⣿⣷⢄⡀⠄⢠⣾⢻⣿⣸⣿⣿⣿⣿⣿⣿⣿ ',
+                    '  ⣡⣿⣿⡟⡼⡁⠁⣰⠂⡾⠉⢨⣿⠃⣿⡿⠍⣾⣟⢤⣿⢇⣿⢇⣿⣿⢿⣿⣿⣿⣿⣿ ',
+                    ' ⣱⣿⣿⡟⡐⣰⣧⡷⣿⣴⣧⣤⣼⣯⢸⡿⠁⣰⠟⢀⣼⠏⣲⠏⢸⣿⡟⣿⣿⣿⣿⣿⣿ ',
+                    ' ⣿⣿⡟⠁⠄⠟⣁⠄⢡⣿⣿⣿⣿⣿⣿⣦⣼⢟⢀⡼⠃⡹⠃⡀⢸⡿⢸⣿⣿⣿⣿⣿⡟ ',
+                    ' ⣿⣿⠃⠄⢀⣾⠋⠓⢰⣿⣿⣿⣿⣿⣿⠿⣿⣿⣾⣅⢔⣕⡇⡇⡼⢁⣿⣿⣿⣿⣿⣿⢣ ',
+                    ' ⣿⡟⠄⠄⣾⣇⠷⣢⣿⣿⣿⣿⣿⣿⣿⣭⣀⡈⠙⢿⣿⣿⡇⡧⢁⣾⣿⣿⣿⣿⣿⢏⣾ ',
+                    ' ⣿⡇⠄⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⢻⠇⠄⠄⢿⣿⡇⢡⣾⣿⣿⣿⣿⣿⣏⣼⣿ ',
+                    ' ⣿⣷⢰⣿⣿⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⢰⣧⣀⡄⢀⠘⡿⣰⣿⣿⣿⣿⣿⣿⠟⣼⣿⣿ ',
+                    ' ⢹⣿⢸⣿⣿⠟⠻⢿⣿⣿⣿⣿⣿⣿⣿⣶⣭⣉⣤⣿⢈⣼⣿⣿⣿⣿⣿⣿⠏⣾⣹⣿⣿ ',
+                    ' ⢸⠇⡜⣿⡟⠄⠄⠄⠈⠙⣿⣿⣿⣿⣿⣿⣿⣿⠟⣱⣻⣿⣿⣿⣿⣿⠟⠁⢳⠃⣿⣿⣿ ',
+                    '  ⣰⡗⠹⣿⣄⠄⠄⠄⢀⣿⣿⣿⣿⣿⣿⠟⣅⣥⣿⣿⣿⣿⠿⠋  ⣾⡌⢠⣿⡿⠃ ',
+                    ' ⠜⠋⢠⣷⢻⣿⣿⣶⣾⣿⣿⣿⣿⠿⣛⣥⣾⣿⠿⠟⠛⠉            ',
+                    '',
+                    '',
+                },
+            }, --  config used for theme
+            hide = {
+                --   statusline,    -- hide statusline default is true
+                tabline, -- hide the tabline
+                winbar, -- hide winbar
+            },
+            preview = {
+                command, -- preview command
+                file_path, -- preview file path
+                file_height, -- preview file height
+                file_width, -- preview file width
+            },
         }
     end
 end
