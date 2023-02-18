@@ -13,7 +13,7 @@ return {
     {
         "akinsho/toggleterm.nvim",
         config = function(LazyPlugins, opts)
-            M.ob_terminal_init()
+            -- M.ob_terminal_init()
             require("toggleterm").setup {
                 hide_numbers = true, -- hide the number column in toggleterm buffers
                 shade_filetypes = {},

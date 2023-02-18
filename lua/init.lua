@@ -38,7 +38,13 @@ require("lazy").setup(
         "skywind3000/asyncrun.vim",
         {
             "phaazon/hop.nvim",
-            config = require("hop").setup()
+            config = function(LazyPlugin, opts)
+                if (require("lazy_config").no_plugin_installed())
+                then
+                else
+                    require("hop").setup()
+                end
+            end
         },
         "mrjones2014/nvim-ts-rainbow",
         "tpope/vim-fugitive",
