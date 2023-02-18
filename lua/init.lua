@@ -29,6 +29,7 @@ vim.opt.rtp:append(require("lazy_config").plugin_path .. "/formatter.nvim/")
 vim.opt.rtp:append(require("lazy_config").plugin_path .. "/nvim-treesitter/")
 vim.opt.rtp:append(require("lazy_config").plugin_path .. "/dashboard-nvim/")
 vim.opt.rtp:append(require("lazy_config").plugin_path .. "/hop.nvim/")
+vim.opt.rtp:append(require("lazy_config").plugin_path .. "/toggleterm.nvim/")
 
 require("lazy").setup(
     {
@@ -39,7 +40,6 @@ require("lazy").setup(
             "phaazon/hop.nvim",
             config = require("hop").setup()
         },
-        "akinsho/toggleterm.nvim",
         "mrjones2014/nvim-ts-rainbow",
         "tpope/vim-fugitive",
         "sbdchd/neoformat",
@@ -64,5 +64,6 @@ require("lazy").setup(
         -- require("plugins.ui"),
         require("plugins.lsp"),
         require("plugins.ui"),
+        require("plugins.term")
     },
     lazy_config.get_config())
