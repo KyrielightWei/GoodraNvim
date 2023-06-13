@@ -103,16 +103,16 @@ let g:asyncrun_open = 6
 let g:asynctasks_term_pos = 'tab'
 let g:asynctasks_term_reuse = 1
 
-nnoremap <C-t> <cmd>TroubleClose<CR>
-nnoremap gd <cmd>Trouble lsp_definitions<CR>
-nnoremap gr <cmd>Trouble lsp_references<CR>
-nnoremap gy <cmd>Trouble lsp_type_definitions<CR>
-"  nnoremap gd <cmd>lua require'telescope.builtin'.lsp_definitions{}<CR>
-"  nnoremap gr <cmd>lua require'telescope.builtin'.lsp_references{}<CR>
+" nnoremap <C-t> <cmd>TroubleClose<CR>
+" nnoremap gd <cmd>Trouble lsp_definitions<CR>
+" nnoremap gr <cmd>Trouble lsp_references<CR>
+" nnoremap gy <cmd>Trouble lsp_type_definitions<CR>
+nnoremap gd <cmd>lua require'telescope.builtin'.lsp_definitions{}<CR>
+nnoremap gr <cmd>lua require'telescope.builtin'.lsp_references{}<CR>
 nnoremap gD <cmd>lua require'telescope.builtin'.lsp_declaration{}<CR>
 nnoremap K <cmd>lua require'telescope.builtin'.lsp_hover{}<CR>
 nnoremap gi <cmd>lua require'telescope.builtin'.lsp_implementations{}<CR>
-"  nnoremap gy <cmd>lua require'telescope.builtin'.lsp_type_definitions{}<CR>
+nnoremap gy <cmd>lua require'telescope.builtin'.lsp_type_definitions{}<CR>
 nnoremap <space>d <cmd>lua require'telescope.builtin'.diagnostics{}<CR>
 nnoremap <space>o <cmd>lua require'telescope.builtin'.lsp_document_symbols{}<CR>
 nnoremap <space>w <cmd>lua require'telescope.builtin'.lsp_workspace_symbols{}<CR>

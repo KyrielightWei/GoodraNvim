@@ -1,9 +1,9 @@
 return {
-  {
-    "j-hui/fidget.nvim",
-    name = "fidget",
-    config = true,
-  },
+  -- {
+  --   "j-hui/fidget.nvim",
+  --   name = "fidget",
+  --   config = true,
+  -- },
   { "onsails/lspkind.nvim",
     name = "lspkind",
     opts = {
