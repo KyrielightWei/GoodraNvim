@@ -1,5 +1,6 @@
 return {
-    { "nvim-lualine/lualine.nvim",
+    {
+        "nvim-lualine/lualine.nvim",
         event = "VeryLazy",
         name = "lualine",
         opts = require("plugins.ui.config").lualine_opt(plugin)
@@ -22,7 +23,8 @@ return {
     },
     {
         "nvim-telescope/telescope-fzf-native.nvim",
-        build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
+        build =
+        "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
         config = require("plugins.ui.config").telescope_fzf_config(LazyPlugin, opts)
     },
     {
@@ -56,7 +58,7 @@ return {
         "glepnir/dashboard-nvim",
         event = 'VimEnter',
         config =
-        require("plugins.ui.config").dashboard_config()
+            require("plugins.ui.config").dashboard_config()
         ,
         dependencies = { { 'nvim-tree/nvim-web-devicons' } }
     },
@@ -71,16 +73,15 @@ return {
             show_current_context = true,
         },
     },
-    {
-        "folke/todo-comments.nvim",
-        dependencies = { "nvim-lua/plenary.nvim" },
-        opts = {
-            -- your configuration comes here
-            -- or leave it empty to use the default settings
-            -- refer to the configuration section below
-        }
-    },
-    -- lazy.nvim
+    -- {
+    --     "folke/todo-comments.nvim",
+    --     dependencies = { "nvim-lua/plenary.nvim" },
+    --     opts = {
+    --         -- your configuration comes here
+    --         -- or leave it empty to use the default settings
+    --         -- refer to the configuration section below
+    --     },
+    -- },
     {
         "folke/noice.nvim",
         event = "VeryLazy",

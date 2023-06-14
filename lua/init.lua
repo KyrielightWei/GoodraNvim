@@ -46,7 +46,6 @@ require("lazy").setup(
                 end
             end
         },
-        "mrjones2014/nvim-ts-rainbow",
         "tpope/vim-fugitive",
         "sbdchd/neoformat",
         {
@@ -63,6 +62,7 @@ require("lazy").setup(
             },
             config = require("lazy_config").treesitter_config(lazy_config, opts)
         },
+        "mrjones2014/nvim-ts-rainbow",
         -- "luochen1990/rainbow",
         -- "kyazdani42/nvim-web-devicons",
         -- require("plugins.common"),
