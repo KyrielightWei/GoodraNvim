@@ -33,6 +33,14 @@ vim.opt.rtp:append(require("lazy_config").plugin_path .. "/toggleterm.nvim/")
 
 require("lazy").setup(
     {
+        {
+            "nvim-treesitter/nvim-treesitter",
+            build = ':TSUpdate',
+            dependencies = {
+                "mrjones2014/nvim-ts-rainbow"
+            },
+            config = require("lazy_config").treesitter_config(lazy_config, opts)
+        },
         "nvim-lua/plenary.nvim",
         "skywind3000/asynctasks.vim",
         "skywind3000/asyncrun.vim",
@@ -53,14 +61,6 @@ require("lazy").setup(
             config = function(lazy_plugin, opts)
                 require('Comment').setup()
             end
-        },
-        {
-            "nvim-treesitter/nvim-treesitter",
-            build = ':TSUpdate',
-            dependencies = {
-                "mrjones2014/nvim-ts-rainbow"
-            },
-            config = require("lazy_config").treesitter_config(lazy_config, opts)
         },
         "mrjones2014/nvim-ts-rainbow",
         -- "luochen1990/rainbow",

@@ -59,7 +59,7 @@ function M.cmp_opt()
                 { name = 'path' },
                 { name = 'nvim_lua' },
                 -- { name = 'nvim_lsp_document_symbol' },
-                { name = 'treesitter' },
+                -- { name = 'treesitter' },
                 { name = 'nvim_lsp_signature_help' },
             }),
         }

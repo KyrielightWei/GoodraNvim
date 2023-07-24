@@ -54,7 +54,7 @@ M.icons = {
 }
 
 function M.no_plugin_installed()
-    --   return true;
+    -- return true;
     return false;
 end
 
@@ -228,7 +228,9 @@ function M.treesitter_config(LazyPlugin, opts)
                 enable = true,
 
                 -- list of language that will be disabled
-                disable = {},
+                disable = function(lang, bufnr) -- Disable in large C++ buffers
+                    return lang == "cpp" and vim.api.nvim_buf_line_count(bufnr) > 5000
+                  end,
 
                 -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
                 -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
@@ -237,7 +239,7 @@ function M.treesitter_config(LazyPlugin, opts)
                 additional_vim_regex_highlighting = false,
             },
             incremental_selection = {
-                enable = true,
+                enable = false,
                 keymaps = {
                     -- init_selection = "gnn",
                     -- node_incremental = "grn",
@@ -246,7 +248,7 @@ function M.treesitter_config(LazyPlugin, opts)
                 }
             },
             indent = {
-                enable = true
+                enable = false
             },
             rainbow = {
                 enable = true,
