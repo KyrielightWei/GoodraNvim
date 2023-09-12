@@ -112,7 +112,7 @@ set display=lastline
 set wildmenu
 
 " 延迟绘制（提升性能）
-set lazyredraw
+" set lazyredraw
 
 " 错误格式
 set errorformat+=[%f:%l]\ ->\ %m,[%f:%l]:%m

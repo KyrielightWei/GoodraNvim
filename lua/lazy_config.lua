@@ -229,7 +229,7 @@ function M.treesitter_config(LazyPlugin, opts)
 
                 -- list of language that will be disabled
                 disable = function(lang, bufnr) -- Disable in large C++ buffers
-                    return lang == "cpp" and vim.api.nvim_buf_line_count(bufnr) > 5000
+                    return lang == "cpp" and vim.api.nvim_buf_line_count(bufnr) > 3000
                   end,
 
                 -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
