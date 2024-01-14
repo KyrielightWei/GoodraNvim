@@ -66,17 +66,12 @@ return {
     {
         "lukas-reineke/indent-blankline.nvim",
         main = "ibl",
-        opts = {
-            -- char = "▏",
-            -- char = "│",
-            -- filetype_exclude = { "help", "alpha", "dashboard", "neo-tree", "Trouble", "lazy" },
+        opts = require("ibl").setup({
             exclude = {
-                filetypes = {"help", "alpha", "dashboard", "neo-tree", "Trouble", "lazy"  },
+                filetypes = { "lspinfo", "help", "TelescopeResult", "dashboard", "neo-tree", "Trouble", "lazy" },
                 buftypes = { "terminal" },
             }
-            -- show_trailing_blankline_indent = false,
-            -- show_current_context = true,
-        },
+        }),
     },
     -- {
     --     "folke/todo-comments.nvim",
