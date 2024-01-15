@@ -1,6 +1,9 @@
-source ~/.zinit/zinit.zsh
+ZINIT_HOME="${HOME}/.local/share/zinit/zinit.git"
+[ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
+[ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+source "${ZINIT_HOME}/zinit.zsh"
 
-# source ~/.bashrc
+source ~/.bashrc
 
 # 快速目录跳转
 zinit ice lucid wait='1'
@@ -26,8 +29,10 @@ zinit snippet OMZ::lib/theme-and-appearance.zsh
 zinit snippet OMZ::plugins/colored-man-pages/colored-man-pages.plugin.zsh
 zinit snippet OMZ::plugins/sudo/sudo.plugin.zsh
 
-zinit ice svn
-# zinit snippet OMZ::plugins/extract
+zinit snippet OMZ::plugins/svn/svn.plugin.zsh
+
+zinit ice 
+zinit snippet OMZP::extract/
 
 zinit ice lucid wait='1'
 zinit snippet OMZ::plugins/git/git.plugin.zsh
