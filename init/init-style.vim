@@ -58,7 +58,8 @@ set termguicolors
 " 设置颜色主题，会在所有 runtimepaths 的 colors 目录寻找同名配置
 " colorscheme catppuccin-mocha
 " colorscheme kanagawa-wave
-colorscheme sonokai
+" colorscheme sonokai
+colorscheme dracula-soft
 " colorscheme miasma
 
 "----------------------------------------------------------------------

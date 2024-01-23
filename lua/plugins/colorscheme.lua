@@ -11,6 +11,7 @@ return {
         end,
     },
     "sainnhe/everforest",
+    "Mofiqul/dracula.nvim",
     "sainnhe/sonokai",
     {
         "catppuccin/nvim",
