@@ -59,7 +59,8 @@ set termguicolors
 " colorscheme catppuccin-mocha
 " colorscheme kanagawa-wave
 " colorscheme sonokai
-colorscheme dracula-soft
+colorscheme melange
+" colorscheme dracula-soft
 " colorscheme miasma
 
 "----------------------------------------------------------------------
