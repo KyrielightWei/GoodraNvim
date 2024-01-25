@@ -4,6 +4,11 @@ ZINIT_HOME="${HOME}/.local/share/zinit/zinit.git"
 source "${ZINIT_HOME}/zinit.zsh"
 
 source ~/.bashrc
+# SELF_DEV_FILE=~/.self_dev_env.sh
+# if [ -f "$SELF_DEV_FILE" ]; then 
+#   source $SELF_DEV_FILE
+#   echo "source $SELF_DEV_FILE"
+# fi
 
 # 快速目录跳转
 zinit ice lucid wait='1'

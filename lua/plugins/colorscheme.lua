@@ -15,6 +15,11 @@ return {
     "Mofiqul/dracula.nvim",
     "sainnhe/sonokai",
     {
+        "polirritmico/monokai-nightasty.nvim",
+        lazy = false,
+        priority = 1000,
+    },
+    {
         "catppuccin/nvim",
         name = "catppuccin",
         opts = {
