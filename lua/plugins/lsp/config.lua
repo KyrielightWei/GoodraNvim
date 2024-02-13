@@ -251,6 +251,7 @@ function M.lspconfig_config(LazyPlugin, opts)
     then
     else
         require('lspconfig').ccls.setup({
+            autostart = false,
             on_attach = function(client, bufnr)
                 local map_opts = { noremap = true, silent = true }
                 vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>k', '<cmd>lua vim.lsp.buf.signature_help()<CR>',

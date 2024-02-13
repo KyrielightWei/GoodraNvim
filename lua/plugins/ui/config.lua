@@ -573,6 +573,18 @@ function M.nvim_context_vt_opt()
     end
 end
 
+function M.indent_blankline_config()
+    if no_plugin then
+    else
+        require("ibl").setup({
+            exclude = {
+                filetypes = { "lspinfo", "help", "TelescopeResult", "dashboard", "neo-tree", "Trouble", "lazy" },
+                buftypes = { "terminal" },
+            }
+        })
+    end
+end
+
 function M.dashboard_config()
     if no_plugin then
     else
