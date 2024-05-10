@@ -121,6 +121,7 @@ nnoremap <space>g <cmd>lua require'telescope.builtin'.git_files{}<CR>
 nnoremap <space>b <cmd>lua require'telescope.builtin'.buffers{}<CR>
 nnoremap <space>h <cmd>lua require'telescope.builtin'.oldfiles{}<CR>
 nnoremap <space>s <cmd>lua require'telescope.builtin'.live_grep{}<CR>
+nnoremap <space>r <cmd>lua require'telescope.builtin'.treesitter{}<CR>
 nnoremap <space>t <cmd>lua require('telescope').extensions.asynctasks.all()<CR>
 
 " 界面样式
