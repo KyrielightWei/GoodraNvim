@@ -60,7 +60,8 @@ set termguicolors
 " colorscheme kanagawa-wave
 let g:sonokai_style = 'maia'
 let g:sonokai_better_performance = 1
-colorscheme sonokai
+colorscheme kanagawa-paper
+" colorscheme sonokai
 " colorscheme monokai-nightasty
 " colorscheme dracula-soft
 " colorscheme miasma

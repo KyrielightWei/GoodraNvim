@@ -13,6 +13,12 @@ return {
     "sainnhe/everforest",
     "savq/melange-nvim",
     "Mofiqul/dracula.nvim",
+    {
+      "sho-87/kanagawa-paper.nvim",
+      lazy = false,
+      priority = 1000,
+      opts = {},
+    },
     "sainnhe/sonokai",
     {
         "polirritmico/monokai-nightasty.nvim",
