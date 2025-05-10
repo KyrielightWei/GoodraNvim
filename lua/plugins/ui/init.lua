@@ -54,13 +54,21 @@ return {
     --     dependencies = { "nvim-tree/nvim-web-devicons" },
     -- },
 
+    -- {
+    --     "glepnir/dashboard-nvim",
+    --     event = 'VimEnter',
+    --     config =
+    --         require("plugins.ui.config").dashboard_config()
+    --     ,
+    --     dependencies = { { 'nvim-tree/nvim-web-devicons' } }
+    -- },
     {
-        "glepnir/dashboard-nvim",
-        event = 'VimEnter',
-        config =
-            require("plugins.ui.config").dashboard_config()
-        ,
-        dependencies = { { 'nvim-tree/nvim-web-devicons' } }
+        'goolord/alpha-nvim',
+    dependencies = {
+        'echasnovski/mini.icons',
+        'nvim-lua/plenary.nvim'
+    },
+    config = require("plugins.ui.config").alpha_nvim_config()
     },
 
     {

@@ -44,6 +44,7 @@ vim.opt.rtp:append(require("lazy_config").plugin_path .. "/dashboard-nvim/")
 vim.opt.rtp:append(require("lazy_config").plugin_path .. "/hop.nvim/")
 vim.opt.rtp:append(require("lazy_config").plugin_path .. "/toggleterm.nvim/")
 vim.opt.rtp:append(require("lazy_config").plugin_path .. "/indent-blankline.nvim/")
+vim.opt.rtp:append(require("lazy_config").plugin_path .. "/alpha-nvim/")
 
 require("lazy").setup(
     {

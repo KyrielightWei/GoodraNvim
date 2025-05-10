@@ -54,8 +54,11 @@ function M.lualine_opt(LazyPlugin)
                     --   cond = function() return package.loaded["noice"] and require("noice").api.status.mode.has() end,
                     --   color = fg("Constant") ,
                     -- },
-                    { require("lazy.status").updates, cond = require("lazy.status").has_updates,
-                        color = fg("Special") },
+                    {
+                        require("lazy.status").updates,
+                        cond = require("lazy.status").has_updates,
+                        color = fg("Special")
+                    },
                     {
                         "diff",
                         symbols = {
@@ -66,7 +69,7 @@ function M.lualine_opt(LazyPlugin)
                     },
                 },
                 lualine_y = {
-                    { "progress", separator = "", padding = { left = 1, right = 0 } },
+                    { "progress", separator = "",                   padding = { left = 1, right = 0 } },
                     { "location", padding = { left = 0, right = 1 } },
                 },
                 lualine_z = {
@@ -77,8 +80,10 @@ function M.lualine_opt(LazyPlugin)
             },
             winbar = {
                 lualine_a = {
-                    { 'filename',
-                        path = 1, }
+                    {
+                        'filename',
+                        path = 1,
+                    }
                 },
                 lualine_b = {
                     {
@@ -190,10 +195,10 @@ function M.telescope_opt()
                 -- }
                 -- please take a look at the readme of the extension you want to configure
                 fzf = {
-                    fuzzy = true, -- false will only do exact matching
+                    fuzzy = true,                   -- false will only do exact matching
                     override_generic_sorter = true, -- override the generic sorter
-                    override_file_sorter = true, -- override the file sorter
-                    case_mode = "smart_case", -- or "ignore_case" or "respect_case"
+                    override_file_sorter = true,    -- override the file sorter
+                    case_mode = "smart_case",       -- or "ignore_case" or "respect_case"
                     -- the default case_mode is "smart_case"
                 },
                 -- file_browser = {
@@ -218,15 +223,14 @@ local function nvim_tree_on_attach(bufnr)
     local api = require "nvim-tree.api"
 
     local function opts(desc)
-      return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+        return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
     end
     -- default mappings
     api.config.mappings.default_on_attach(bufnr)
 
     -- custom mappings
     -- vim.keymap.set('n', '<C-t>', api.tree.change_root_to_parent,        opts('Up'))
-    vim.keymap.set('n', '?',     api.tree.toggle_help,                  opts('Help'))
-
+    vim.keymap.set('n', '?', api.tree.toggle_help, opts('Help'))
 end
 
 function M.nvim_tree_opt()
@@ -236,11 +240,11 @@ function M.nvim_tree_opt()
             on_attach = nvim_tree_on_attach,
             tab = {
                 sync = {
-                  open = false,
-                  close = false,
-                  ignore = {},
+                    open = false,
+                    close = false,
+                    ignore = {},
                 },
-              },
+            },
             disable_netrw = true,
             respect_buf_cwd = true,
             update_focused_file = {
@@ -304,14 +308,14 @@ function M.nvim_tree_opt()
                     enable = false,
                     quit_on_focus_loss = true,
                     open_win_config = {
-                      relative = "editor",
-                      border = "rounded",
-                      width = 30,
-                      height = 30,
-                      row = 1,
-                      col = 1,
+                        relative = "editor",
+                        border = "rounded",
+                        width = 30,
+                        height = 30,
+                        row = 1,
+                        col = 1,
                     },
-                  },
+                },
             },
             renderer = {
                 add_trailing = false,
@@ -459,18 +463,24 @@ function M.git_sign_opt()
     else
         return {
             signs                        = {
-                add          = { hl = 'GitSignsAdd', text = '│', numhl = 'GitSignsAddNr', linehl = 'GitSignsAddLn' },
-                change       = { hl = 'GitSignsChange', text = '│', numhl = 'GitSignsChangeNr',
-                    linehl = 'GitSignsChangeLn' },
-                delete       = { hl = 'GitSignsDelete', text = '_', numhl = 'GitSignsDeleteNr',
-                    linehl = 'GitSignsDeleteLn' },
-                topdelete    = { hl = 'GitSignsDelete', text = '‾', numhl = 'GitSignsDeleteNr',
-                    linehl = 'GitSignsDeleteLn' },
-                changedelete = { hl = 'GitSignsChange', text = '~', numhl = 'GitSignsChangeNr',
-                    linehl = 'GitSignsChangeLn' },
+                add          = { text = '┃' },
+                change       = { text = '┃' },
+                delete       = { text = '_' },
+                topdelete    = { text = '‾' },
+                changedelete = { text = '~' },
+                untracked    = { text = '┆' },
             },
-            signcolumn                   = true, -- Toggle with `:Gitsigns toggle_signs`
-            numhl                        = true, -- Toggle with `:Gitsigns toggle_numhl`
+            signs_staged                 = {
+                add          = { text = '┃' },
+                change       = { text = '┃' },
+                delete       = { text = '_' },
+                topdelete    = { text = '‾' },
+                changedelete = { text = '~' },
+                untracked    = { text = '┆' },
+            },
+            signs_staged_enable          = true,
+            signcolumn                   = true,  -- Toggle with `:Gitsigns toggle_signs`
+            numhl                        = true,  -- Toggle with `:Gitsigns toggle_numhl`
             linehl                       = false, -- Toggle with `:Gitsigns toggle_linehl`
             word_diff                    = false, -- Toggle with `:Gitsigns toggle_word_diff`
             watch_gitdir                 = {
@@ -497,9 +507,6 @@ function M.git_sign_opt()
                 relative = 'cursor',
                 row = 0,
                 col = 1
-            },
-            yadm                         = {
-                enable = false
             },
         }
     end
@@ -585,6 +592,29 @@ function M.indent_blankline_config()
     end
 end
 
+local art = {
+
+    "",
+    "",
+    "        ⢀⣴⡾⠃⠄⠄⠄⠄⠄⠈⠺⠟⠛⠛⠛⠛⠻⢿⣿⣿⣿⣿⣶⣤⡀  ",
+    "      ⢀⣴⣿⡿⠁⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⣸⣿⣿⣿⣿⣿⣿⣿⣷ ",
+    "     ⣴⣿⡿⡟⡼⢹⣷⢲⡶⣖⣾⣶⢄⠄⠄⠄⠄⠄⢀⣼⣿⢿⣿⣿⣿⣿⣿⣿⣿ ",
+    "    ⣾⣿⡟⣾⡸⢠⡿⢳⡿⠍⣼⣿⢏⣿⣷⢄⡀⠄⢠⣾⢻⣿⣸⣿⣿⣿⣿⣿⣿⣿ ",
+    "  ⣡⣿⣿⡟⡼⡁⠁⣰⠂⡾⠉⢨⣿⠃⣿⡿⠍⣾⣟⢤⣿⢇⣿⢇⣿⣿⢿⣿⣿⣿⣿⣿ ",
+    " ⣱⣿⣿⡟⡐⣰⣧⡷⣿⣴⣧⣤⣼⣯⢸⡿⠁⣰⠟⢀⣼⠏⣲⠏⢸⣿⡟⣿⣿⣿⣿⣿⣿ ",
+    " ⣿⣿⡟⠁⠄⠟⣁⠄⢡⣿⣿⣿⣿⣿⣿⣦⣼⢟⢀⡼⠃⡹⠃⡀⢸⡿⢸⣿⣿⣿⣿⣿⡟ ",
+    " ⣿⣿⠃⠄⢀⣾⠋⠓⢰⣿⣿⣿⣿⣿⣿⠿⣿⣿⣾⣅⢔⣕⡇⡇⡼⢁⣿⣿⣿⣿⣿⣿⢣ ",
+    " ⣿⡟⠄⠄⣾⣇⠷⣢⣿⣿⣿⣿⣿⣿⣿⣭⣀⡈⠙⢿⣿⣿⡇⡧⢁⣾⣿⣿⣿⣿⣿⢏⣾ ",
+    " ⣿⡇⠄⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⢻⠇⠄⠄⢿⣿⡇⢡⣾⣿⣿⣿⣿⣿⣏⣼⣿ ",
+    " ⣿⣷⢰⣿⣿⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⢰⣧⣀⡄⢀⠘⡿⣰⣿⣿⣿⣿⣿⣿⠟⣼⣿⣿ ",
+    " ⢹⣿⢸⣿⣿⠟⠻⢿⣿⣿⣿⣿⣿⣿⣿⣶⣭⣉⣤⣿⢈⣼⣿⣿⣿⣿⣿⣿⠏⣾⣹⣿⣿ ",
+    " ⢸⠇⡜⣿⡟⠄⠄⠄⠈⠙⣿⣿⣿⣿⣿⣿⣿⣿⠟⣱⣻⣿⣿⣿⣿⣿⠟⠁⢳⠃⣿⣿⣿ ",
+    "  ⣰⡗⠹⣿⣄⠄⠄⠄⢀⣿⣿⣿⣿⣿⣿⠟⣅⣥⣿⣿⣿⣿⠿⠋  ⣾⡌⢠⣿⡿⠃ ",
+    " ⠜⠋⢠⣷⢻⣿⣿⣶⣾⣿⣿⣿⣿⠿⣛⣥⣾⣿⠿⠟⠛⠉            ",
+    "",
+    ""
+}
+
 function M.dashboard_config()
     if no_plugin then
     else
@@ -592,41 +622,335 @@ function M.dashboard_config()
             theme = 'hyper', --  theme is doom and hyper default is hyper
             config = {
 
-                header =
-                {
-                    '',
-                    '',
-                    '        ⢀⣴⡾⠃⠄⠄⠄⠄⠄⠈⠺⠟⠛⠛⠛⠛⠻⢿⣿⣿⣿⣿⣶⣤⡀  ',
-                    '      ⢀⣴⣿⡿⠁⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⣸⣿⣿⣿⣿⣿⣿⣿⣷ ',
-                    '     ⣴⣿⡿⡟⡼⢹⣷⢲⡶⣖⣾⣶⢄⠄⠄⠄⠄⠄⢀⣼⣿⢿⣿⣿⣿⣿⣿⣿⣿ ',
-                    '    ⣾⣿⡟⣾⡸⢠⡿⢳⡿⠍⣼⣿⢏⣿⣷⢄⡀⠄⢠⣾⢻⣿⣸⣿⣿⣿⣿⣿⣿⣿ ',
-                    '  ⣡⣿⣿⡟⡼⡁⠁⣰⠂⡾⠉⢨⣿⠃⣿⡿⠍⣾⣟⢤⣿⢇⣿⢇⣿⣿⢿⣿⣿⣿⣿⣿ ',
-                    ' ⣱⣿⣿⡟⡐⣰⣧⡷⣿⣴⣧⣤⣼⣯⢸⡿⠁⣰⠟⢀⣼⠏⣲⠏⢸⣿⡟⣿⣿⣿⣿⣿⣿ ',
-                    ' ⣿⣿⡟⠁⠄⠟⣁⠄⢡⣿⣿⣿⣿⣿⣿⣦⣼⢟⢀⡼⠃⡹⠃⡀⢸⡿⢸⣿⣿⣿⣿⣿⡟ ',
-                    ' ⣿⣿⠃⠄⢀⣾⠋⠓⢰⣿⣿⣿⣿⣿⣿⠿⣿⣿⣾⣅⢔⣕⡇⡇⡼⢁⣿⣿⣿⣿⣿⣿⢣ ',
-                    ' ⣿⡟⠄⠄⣾⣇⠷⣢⣿⣿⣿⣿⣿⣿⣿⣭⣀⡈⠙⢿⣿⣿⡇⡧⢁⣾⣿⣿⣿⣿⣿⢏⣾ ',
-                    ' ⣿⡇⠄⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⢻⠇⠄⠄⢿⣿⡇⢡⣾⣿⣿⣿⣿⣿⣏⣼⣿ ',
-                    ' ⣿⣷⢰⣿⣿⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⢰⣧⣀⡄⢀⠘⡿⣰⣿⣿⣿⣿⣿⣿⠟⣼⣿⣿ ',
-                    ' ⢹⣿⢸⣿⣿⠟⠻⢿⣿⣿⣿⣿⣿⣿⣿⣶⣭⣉⣤⣿⢈⣼⣿⣿⣿⣿⣿⣿⠏⣾⣹⣿⣿ ',
-                    ' ⢸⠇⡜⣿⡟⠄⠄⠄⠈⠙⣿⣿⣿⣿⣿⣿⣿⣿⠟⣱⣻⣿⣿⣿⣿⣿⠟⠁⢳⠃⣿⣿⣿ ',
-                    '  ⣰⡗⠹⣿⣄⠄⠄⠄⢀⣿⣿⣿⣿⣿⣿⠟⣅⣥⣿⣿⣿⣿⠿⠋  ⣾⡌⢠⣿⡿⠃ ',
-                    ' ⠜⠋⢠⣷⢻⣿⣿⣶⣾⣿⣿⣿⣿⠿⣛⣥⣾⣿⠿⠟⠛⠉            ',
-                    '',
-                    '',
-                },
+                header = art,
             }, --  config used for theme
             hide = {
                 --   statusline,    -- hide statusline default is true
                 tabline, -- hide the tabline
-                winbar, -- hide winbar
+                winbar,  -- hide winbar
             },
             preview = {
-                command, -- preview command
-                file_path, -- preview file path
+                command,     -- preview command
+                file_path,   -- preview file path
                 file_height, -- preview file height
-                file_width, -- preview file width
+                file_width,  -- preview file width
             },
         }
+    end
+end
+
+function M.alpha_nvim_config()
+    if no_plugin then
+    else
+        local alpha = require("alpha")
+        local dashboard = require("alpha.themes.dashboard")
+
+        math.randomseed(os.time())
+
+        local function pick_color()
+            local colors = { "String", "Identifier", "Keyword", "Number" }
+            return colors[math.random(#colors)]
+        end
+
+        local function footer()
+            local datetime = os.date(" %d-%m-%Y   %H:%M:%S")
+            local version = vim.version()
+            local nvim_version_info = "   v" .. version.major .. "." .. version.minor .. "." .. version.patch
+
+            return datetime .. "  " .. nvim_version_info
+        end
+
+        -- local logo = {
+        --     "",
+        --     "",
+        --     "        ⢀⣴⡾⠃⠄⠄⠄⠄⠄⠈⠺⠟⠛⠛⠛⠛⠻⢿⣿⣿⣿⣿⣶⣤⡀  ",
+        --     "      ⢀⣴⣿⡿⠁⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⣸⣿⣿⣿⣿⣿⣿⣿⣷ ",
+        --     "     ⣴⣿⡿⡟⡼⢹⣷⢲⡶⣖⣾⣶⢄⠄⠄⠄⠄⠄⢀⣼⣿⢿⣿⣿⣿⣿⣿⣿⣿ ",
+        --     "    ⣾⣿⡟⣾⡸⢠⡿⢳⡿⠍⣼⣿⢏⣿⣷⢄⡀⠄⢠⣾⢻⣿⣸⣿⣿⣿⣿⣿⣿⣿ ",
+        --     "  ⣡⣿⣿⡟⡼⡁⠁⣰⠂⡾⠉⢨⣿⠃⣿⡿⠍⣾⣟⢤⣿⢇⣿⢇⣿⣿⢿⣿⣿⣿⣿⣿ ",
+        --     " ⣱⣿⣿⡟⡐⣰⣧⡷⣿⣴⣧⣤⣼⣯⢸⡿⠁⣰⠟⢀⣼⠏⣲⠏⢸⣿⡟⣿⣿⣿⣿⣿⣿ ",
+        --     " ⣿⣿⡟⠁⠄⠟⣁⠄⢡⣿⣿⣿⣿⣿⣿⣦⣼⢟⢀⡼⠃⡹⠃⡀⢸⡿⢸⣿⣿⣿⣿⣿⡟ ",
+        --     " ⣿⣿⠃⠄⢀⣾⠋⠓⢰⣿⣿⣿⣿⣿⣿⠿⣿⣿⣾⣅⢔⣕⡇⡇⡼⢁⣿⣿⣿⣿⣿⣿⢣ ",
+        --     " ⣿⡟⠄⠄⣾⣇⠷⣢⣿⣿⣿⣿⣿⣿⣿⣭⣀⡈⠙⢿⣿⣿⡇⡧⢁⣾⣿⣿⣿⣿⣿⢏⣾ ",
+        --     " ⣿⡇⠄⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⢻⠇⠄⠄⢿⣿⡇⢡⣾⣿⣿⣿⣿⣿⣏⣼⣿ ",
+        --     " ⣿⣷⢰⣿⣿⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⢰⣧⣀⡄⢀⠘⡿⣰⣿⣿⣿⣿⣿⣿⠟⣼⣿⣿ ",
+        --     " ⢹⣿⢸⣿⣿⠟⠻⢿⣿⣿⣿⣿⣿⣿⣿⣶⣭⣉⣤⣿⢈⣼⣿⣿⣿⣿⣿⣿⠏⣾⣹⣿⣿ ",
+        --     " ⢸⠇⡜⣿⡟⠄⠄⠄⠈⠙⣿⣿⣿⣿⣿⣿⣿⣿⠟⣱⣻⣿⣿⣿⣿⣿⠟⠁⢳⠃⣿⣿⣿ ",
+        --     "  ⣰⡗⠹⣿⣄⠄⠄⠄⢀⣿⣿⣿⣿⣿⣿⠟⣅⣥⣿⣿⣿⣿⠿⠋  ⣾⡌⢠⣿⡿⠃ ",
+        --     " ⠜⠋⢠⣷⢻⣿⣿⣶⣾⣿⣿⣿⣿⠿⣛⣥⣾⣿⠿⠟⠛⠉            ",
+        --     "",
+        --     ""
+        -- }
+        --
+        local logo = {
+            "",
+            "",
+            "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⡆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+            "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣾⣿⣧⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+            "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣾⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+            "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡾⠋⠉⠀⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+            "⠀⠀⠀⠀⠀⠀⠀⠀⠀⣼⠃⠀⠀⠀⡇⠀⠀⠀⠀⠀⠀⣠⠖⠲⢤⡖⠒⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+            "⠀⠀⠀⠀⠀⠀⠀⠀⢀⡏⠀⠀⠀⠀⡇⠀⠀⠀⠀⠀⠀⡏⠀⠀⠀⠀⠀⢀⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+            "⠀⠀⠀⠀⢀⣀⠀⠀⢸⠀⠀⠀⠀⠀⡇⠀⠀⠀⠀⠀⠀⠸⣄⠀⠁⣠⠞⠉⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣀⣠⣤⣤⣤⣤⠀⠀",
+            "⠀⡞⠉⠻⠁⢹⠀⠀⡏⠀⠀⠀⠀⢸⠃⠀⠀⠀⠀⠀⠀⠀⠀⠹⣶⠋⠀⠀⠀⠀⣀⡤⠴⠒⠊⠉⠉⠀⠀⣿⣿⣿⠿⠋⠀⠀",
+            "⠀⠳⢤⡀⠀⡞⠁⠀⡇⠀⠀⢀⡠⠼⠴⠒⠒⠒⠒⠦⠤⠤⣄⣀⠀⢀⣠⠴⠚⠉⠀⠀⠀⠀⠀⠀⠀⠀⣼⠿⠋⠁⠀⠀⠀⠀",
+            "⠀⠀⠀⠈⠷⡏⠀⠀⣇⠔⠂⠈⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢨⠿⠋⠀⠀⠀⠀⠀⠀⠀⠀⣀⡤⠖⠋⠁⠀⠀⠀⠀⠀⠀⠀",
+            "⠀⠀⠀⠀⠀⠀⠀⢰⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣠⠤⠒⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+            "⠀⠀⠀⠀⠀⠀⢀⡟⠀⣠⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⢻⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⣤⣤⡤⠤⢴",
+            "⠀⠀⠀⠀⠀⠀⣸⠁⣾⣿⣀⣽⡆⠀⠀⠀⠀⠀⠀⠀⢠⣾⠉⢿⣦⠀⠀⠀⢸⡀⠀⠀⢀⣠⠤⠔⠒⠋⠉⠉⠀⠀⠀⠀⢀⡞",
+            "⠀⠀⠀⠀⠀⢀⡏⠀⠹⠿⠿⠟⠁⠀⠰⠦⠀⠀⠀⠀⠸⣿⣿⣿⡿⠀⠀⠀⢘⡧⠖⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡼⠀",
+            "⠀⠀⠀⠀⠀⣼⠦⣄⠀⠀⢠⣀⣀⣴⠟⠶⣄⡀⠀⠀⡀⠀⠉⠁⠀⠀⠀⠀⢸⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣸⠁⠀",
+            "⠀⠀⠀⠀⢰⡇⠀⠈⡇⠀⠀⠸⡾⠁⠀⠀⠀⠉⠉⡏⠀⠀⠀⣠⠖⠉⠓⢤⢸⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣰⠃⠀⠀",
+            "⠀⠀⠀⠀⠀⢧⣀⡼⠃⠀⠀⠀⢧⠀⠀⠀⠀⠀⢸⠃⠀⠀⠀⣧⠀⠀⠀⣸⢹⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡰⠃⠀⠀⠀",
+            "⠀⠀⠀⠀⠀⠈⢧⡀⠀⠀⠀⠀⠘⣆⠀⠀⠀⢠⠏⠀⠀⠀⠀⠈⠳⠤⠖⠃⡟⠀⠀⠀⢾⠛⠛⠛⠛⠛⠛⠛⠛⠁⠀⠀⠀⠀",
+            "⠀⠀⠀⠀⠀⠀⠀⠙⣆⠀⠀⠀⠀⠈⠦⣀⡴⠋⠀⠀⠀⠀⠀⠀⠀⠀⢀⣼⠙⢦⠀⠀⠘⡇⠀⠀⠀⠀⠀⠀⢀⣀⠀⠀⠀⠀",
+            "⠀⠀⠀⠀⠀⠀⠀⢠⡇⠙⠦⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⠴⠋⠸⡇⠈⢳⡀⠀⢹⡀⠀⠀⠀⢀⡞⠁⠉⣇⣀⠀⠀",
+            "⠀⠀⠀⠀⠀⠀⠀⡼⣀⠀⠀⠈⠙⠂⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠀⠀⠀⠀⣷⠴⠚⠁⠀⣀⣷⠀⠀⠀⢠⠇⠀⠀⠀⠀⠀⣳",
+            "⠀⠀⠀⠀⠀⠀⡴⠁⡏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⣆⡴⠚⠉⠉⠀⠀⠀⠀⢸⠃⣀⣠⠤⠤⠖⠋",
+            "⣼⢷⡆⠀⣠⡴⠧⣄⣇⠀⠀⠀⠀⡴⠚⠙⠲⠞⠛⠙⡆⠀⠀⠀⠀⠀⢀⡇⣠⣽⢦⣄⢀⣴⣶⠀⠋⠉⠀⠀⠀⠀⠀⠀⠀⠀",
+            "⡿⣼⣽⡞⠁⠀⠀⠀⢹⡀⠀⠀⠀⢹⠀⠀⠀⠀⠀⠀⣸⠀⠀⠀⠀⠀⣼⠉⠁⠀⠀⢠⢟⣿⣿⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+            "⣷⠉⠁⢳⠀⠀⠀⠀⠈⣧⠀⠀⠀⠀⠙⢦⠀⠀⠀⡠⠁⠀⠀⠀⠀⣰⠃⠀⠀⠀⠀⠏⠀⠀⡿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+            "⠹⡆⠀⠈⡇⠀⠀⠀⠀⠘⣆⠀⠀⠀⠀⠀⠹⣧⠞⠁⠀⠀⠀⠀⣰⠃⠀⠀⠀⠀⠀⠀⠀⣸⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+            "⠀⢳⡀⠀⠙⠀⠀⠀⠀⠀⠘⣆⠀⠀⠀⠀⠀⡇⠀⠀⠀⠀⠀⣰⠃⠀⠀⠀⠀⢀⡄⠀⢠⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+            "⠀⠀⢳⡀⣰⣀⣀⣀⠀⠀⠀⠘⣦⣀⠀⠀⠀⡇⠀⠀⠀⢀⡴⠃⠀⠀⠀⠀⠀⢸⡇⢠⠏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+            "⠀⠀⠀⠉⠉⠀⠀⠈⠉⠉⠉⠙⠻⠿⠾⠾⠻⠓⢦⠦⡶⡶⠿⠛⠛⠓⠒⠒⠚⠛⠛⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+            "",
+            "",
+        }
+        dashboard.section.header.val = logo
+        dashboard.section.header.opts.hl = pick_color()
+
+        dashboard.section.buttons.val = {
+            dashboard.button("nvim_tree", "  File Explorer", ":NvimTreeToggle<CR>"),
+            dashboard.button("Tele-F", "  Find File", "<space>f"),
+            dashboard.button("Tele-S", "  Find Word", "<space>s"),
+            dashboard.button("q", "  Quit", ":qa<cr>")
+        }
+
+        dashboard.section.footer.val = footer()
+        dashboard.section.footer.opts.hl = "Constant"
+
+        --         local mru = {
+        --     type = "group",
+        --     val = {
+        --         { type = "padding", val = 1 },
+        --         { type = "text", val = "MRU", opts = { hl = "SpecialComment" } },
+        --         { type = "padding", val = 1 },
+        --         {
+        --             type = "group",
+        --             val = function()
+        --                 return { require("alpha.themes.startify").mru(5,false, 5) }
+        --             end,
+        --         },
+        --     },
+        -- }
+        -- local mru_cwd = {
+        --     type = "group",
+        --     val = {
+        --         { type = "padding", val = 1 },
+        --         { type = "text",    val = require("alpha.themes.startify").mru_title, opts = { hl = "SpecialComment", shrink_margin = false } },
+        --         { type = "padding", val = 1 },
+        --         {
+        --             type = "group",
+        --             val = function()
+        --                 return { require("alpha.themes.startify").mru(0, vim.fn.getcwd()) }
+        --             end,
+        --             opts = { shrink_margin = false },
+        --         },
+        --     },
+        -- }
+        --
+        local utils = require("alpha.utils")
+        local fnamemodify = vim.fn.fnamemodify
+        local filereadable = vim.fn.filereadable
+        local leader = "SPC"
+
+        local function button(sc, txt, keybind, keybind_opts)
+            local sc_ = sc:gsub("%s", ""):gsub(leader, "<leader>")
+
+            local opts = {
+                position = "center",
+                shortcut = "[" .. sc .. "] ",
+                cursor = 1,
+                -- width = 50,
+                align_shortcut = "left",
+                hl_shortcut = { { "Operator", 0, 1 }, { "Number", 1, #sc + 1 }, { "Operator", #sc + 1, #sc + 2 } },
+                shrink_margin = false,
+            }
+            if keybind then
+                keybind_opts = vim.F.if_nil(keybind_opts, { noremap = true, silent = true, nowait = true })
+                opts.keymap = { "n", sc_, keybind, keybind_opts }
+            end
+
+            local function on_press()
+                local key = vim.api.nvim_replace_termcodes(keybind .. "<Ignore>", true, false, true)
+                vim.api.nvim_feedkeys(key, "t", false)
+            end
+
+            return {
+                type = "button",
+                val = txt,
+                on_press = on_press,
+                opts = opts,
+            }
+        end
+
+        local file_icons = {
+            enabled = true,
+            highlight = true,
+            -- available: devicons, mini, to use nvim-web-devicons or mini.icons
+            -- if provider not loaded and enabled is true, it will try to use another provider
+            provider = "mini",
+        }
+
+        local function icon(fn)
+            if file_icons.provider ~= "devicons" and file_icons.provider ~= "mini" then
+                vim.notify("Alpha: Invalid file icons provider: " .. file_icons.provider .. ", disable file icons",
+                    vim.log.levels.WARN)
+                file_icons.enabled = false
+                return "", ""
+            end
+
+            local ico, hl = utils.get_file_icon(file_icons.provider, fn)
+            if ico == "" then
+                file_icons.enabled = false
+                vim.notify("Alpha: Mini icons or devicons get icon failed, disable file icons", vim.log.levels.WARN)
+            end
+            return ico, hl
+        end
+
+        local function file_button(fn, sc, short_fn, autocd)
+            short_fn = vim.F.if_nil(short_fn, fn)
+            local ico_txt
+            local fb_hl = {}
+            if file_icons.enabled then
+                local ico, hl = icon(fn)
+                local hl_option_type = type(file_icons.highlight)
+                if hl_option_type == "boolean" then
+                    if hl and file_icons.highlight then
+                        table.insert(fb_hl, { hl, 0, #ico })
+                    end
+                end
+                if hl_option_type == "string" then
+                    table.insert(fb_hl, { file_icons.highlight, 0, #ico })
+                end
+                ico_txt = ico .. "  "
+            else
+                ico_txt = ""
+            end
+            local cd_cmd = (autocd and " | cd %:p:h" or "")
+            local file_button_el = button(sc, ico_txt .. short_fn,
+                "<cmd>e " .. vim.fn.fnameescape(fn) .. cd_cmd .. " <CR>")
+            local fn_start = short_fn:match(".*[/\\]")
+            if fn_start ~= nil then
+                table.insert(fb_hl, { "Comment", #ico_txt, #fn_start + #ico_txt })
+            end
+            file_button_el.opts.hl = fb_hl
+            return file_button_el
+        end
+
+        --- @param start number
+        --- @param cwd string? optional
+        --- @param items_number number? optional number of items to generate, default = 10
+        local function mru(start, cwd, items_number, opts)
+            opts = opts or require("alpha.themes.startify").mru_opts
+            items_number = vim.F.if_nil(items_number, 10)
+            local oldfiles = {}
+            for _, v in pairs(vim.v.oldfiles) do
+                if #oldfiles == items_number then
+                    break
+                end
+                local cwd_cond
+                if not cwd then
+                    cwd_cond = true
+                else
+                    cwd_cond = vim.startswith(v, cwd)
+                end
+                local ignore = (opts.ignore and opts.ignore(v, utils.get_extension(v))) or false
+                if (filereadable(v) == 1) and cwd_cond and not ignore then
+                    oldfiles[#oldfiles + 1] = v
+                end
+            end
+
+            local tbl = {}
+            for i, fn in ipairs(oldfiles) do
+                local short_fn
+                if cwd then
+                    short_fn = fnamemodify(fn, ":.")
+                else
+                    short_fn = fnamemodify(fn, ":~")
+                end
+                local file_button_el = file_button(fn, tostring(i + start - 1), short_fn, opts.autocd)
+                tbl[i] = file_button_el
+            end
+            return {
+                type = "group",
+                val = tbl,
+                opts = {
+                    --   position = "center",
+                },
+            }
+        end
+
+
+
+        local function dashboard_mru()
+            return {
+                type = "group",
+                val = {
+                    { type = "padding", val = 1 },
+                    { type = "text",    val = "MRU", opts = { hl = "SpecialComment" } },
+                    { type = "padding", val = 1 },
+                    {
+                        type = "group",
+                        val = function()
+                            return { require("alpha.themes.startify").mru(5, false, 5) }
+                        end,
+                    },
+                },
+                opts = {
+                    position = "center",
+                },
+            }
+        end
+
+        local function dashboard_mru_cwd()
+            return {
+                type = "group",
+                val = {
+                    { type = "padding", val = 1 },
+                    { type = "text",    val = "MRU " .. vim.fn.getcwd(), opts = { position = "center", hl = "SpecialComment", shrink_margin = false } },
+                    { type = "padding", val = 1 },
+                    {
+                        type = "group",
+                        val = function()
+                            return { mru(0, vim.fn.getcwd(), 5) }
+                        end,
+                        opts = {
+
+                        },
+                    },
+                    { type = "padding", val = 1 },
+                },
+                opts = {
+                    -- position = "center",
+                },
+            }
+        end
+
+        dashboard.config.layout = {
+            { type = "padding", val = 2 },
+            dashboard.section.header,
+            { type = "padding", val = 2 },
+            dashboard.section.buttons,
+            dashboard_mru_cwd(),
+            -- dashboard_mru(),
+            dashboard.section.footer,
+        }
+
+        alpha.setup(dashboard.opts)
+
+        vim.cmd([[ autocmd FileType alpha setlocal nofoldenable ]])
     end
 end
 
