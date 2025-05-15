@@ -82,7 +82,7 @@ require("lazy").setup(
         -- "kyazdani42/nvim-web-devicons",
         -- require("plugins.common"),
         require("plugins.colorscheme"),
-        -- require("plugins.ui"),
+        require("plugins.common"),
         require("plugins.lsp"),
         require("plugins.ui"),
         require("plugins.term")
