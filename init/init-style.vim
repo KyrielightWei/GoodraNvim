@@ -56,15 +56,8 @@ set background=dark
 set termguicolors
 
 " 设置颜色主题，会在所有 runtimepaths 的 colors 目录寻找同名配置
-" colorscheme catppuccin-mocha
-" colorscheme kanagawa-wave
-let g:sonokai_style = 'maia'
-let g:sonokai_better_performance = 1
-colorscheme kanagawa-paper
-" colorscheme sonokai
-" colorscheme monokai-nightasty
-" colorscheme dracula-soft
-" colorscheme miasma
+" colorscheme kanagawa-paper
+colorscheme zephyr  
 
 "----------------------------------------------------------------------
 " 状态栏设置

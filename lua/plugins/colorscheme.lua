@@ -26,6 +26,13 @@ return {
         priority = 1000,
     },
     {
+      'datsfilipe/vesper.nvim',
+    },
+    {
+      'glepnir/zephyr-nvim',
+      dependencies = {'nvim-treesitter/nvim-treesitter'},
+    },
+    {
         "catppuccin/nvim",
         name = "catppuccin",
         opts = {
