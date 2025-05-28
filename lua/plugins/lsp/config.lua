@@ -250,23 +250,60 @@ function M.lspconfig_config(LazyPlugin, opts)
     if (no_plugin)
     then
     else
-        require('lspconfig').ccls.setup({
+        vim.lsp.config('*', {
+          root_markers = { '.git' },
+          capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities()),
+        })
+        vim.lsp.config('clangd',{
             autostart = false,
+            cmd = { "clangd" },
+            filetypes = { "c", "cpp", "ipp", "cuda", "ic", "objc", "objcpp" },
+            root_markers = { "compile_commands.json", ".ccls", ".git", ".svn" },
             on_attach = function(client, bufnr)
                 local map_opts = { noremap = true, silent = true }
                 vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>k', '<cmd>lua vim.lsp.buf.signature_help()<CR>',
                     map_opts)
                 vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', map_opts)
 
+                vim.api.nvim_buf_create_user_command(0, 'LspSwitchSourceHeader', function()
+                  switch_source_header(0)
+                end, { desc = 'Switch between source/header' })
+
+                vim.api.nvim_buf_create_user_command(0, 'LspShowSymbolInfo', function()
+                  symbol_info()
+                end, { desc = 'Show symbol info' })
+
                 vim.g.navic_silence = true
                 if client.server_capabilities.documentSymbolProvider then
                     require("nvim-navic").attach(client, bufnr)
                 end
             end,
-            capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities()),
+
+        })
+        vim.lsp.config('ccls', {
+            autostart = false,
             cmd = { "ccls" },
             filetypes = { "c", "cpp", "ipp", "cuda", "ic", "objc", "objcpp" },
-            root_dir = require("lspconfig.util").root_pattern("compile_commands.json", ".ccls", ".git", ".svn"),
+            root_markers = { "compile_commands.json", ".ccls", ".git", ".svn" },
+            on_attach = function(client, bufnr)
+                local map_opts = { noremap = true, silent = true }
+                vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>k', '<cmd>lua vim.lsp.buf.signature_help()<CR>',
+                    map_opts)
+                vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', map_opts)
+
+                vim.api.nvim_buf_create_user_command(0, 'LspSwitchSourceHeader', function()
+                  switch_source_header(client, 0)
+                end, { desc = 'Switch between source/header' })
+
+                vim.api.nvim_buf_create_user_command(0, 'LspShowSymbolInfo', function()
+                  symbol_info()
+                end, { desc = 'Show symbol info' })
+
+                vim.g.navic_silence = true
+                if client.server_capabilities.documentSymbolProvider then
+                    require("nvim-navic").attach(client, bufnr)
+                end
+            end,
             init_options = {
                 compilationDatabaseCommand = "",
                 compilationDatabaseDirectory = "",
@@ -373,6 +410,8 @@ function M.lspconfig_config(LazyPlugin, opts)
                 }
             }
         })
+        
+        vim.lsp.enable('ccls')
     end
 end
 

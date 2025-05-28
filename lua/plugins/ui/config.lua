@@ -384,6 +384,31 @@ function M.telescope_fzf_config(LazyPlugin, opts)
     end
 end
 
+function M.rainbow_config(LazyPlugin, opts)
+  if no_plugin then
+  else 
+    -- require("rainbow-delimiters.setup").setup({
+    --       strategy = {
+    --         [''] = 'rainbow-delimiters.strategy.global',
+    --         vim = 'rainbow-delimiters.strategy.local',
+    --       },
+    --       query = {
+    --         [''] = 'rainbow-delimiters.strategy.global',
+    --         vim = 'rainbow-delimiters.strategy.local',
+    --       },
+    --       highlight = {
+    --         'RainbowDelimiterRed',
+    --         'RainbowDelimiterYellow',
+    --         'RainbowDelimiterBlue',
+    --         'RainbowDelimiterOrange',
+    --         'RainbowDelimiterGreen',
+    --         'RainbowDelimiterViolet',
+    --         'RainbowDelimiterCyan',
+    --       },
+    -- })
+  end
+end
+
 function M.barbar_opts()
     if no_plugin then
     else

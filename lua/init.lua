@@ -45,14 +45,17 @@ vim.opt.rtp:append(require("lazy_config").plugin_path .. "/hop.nvim/")
 vim.opt.rtp:append(require("lazy_config").plugin_path .. "/toggleterm.nvim/")
 vim.opt.rtp:append(require("lazy_config").plugin_path .. "/indent-blankline.nvim/")
 vim.opt.rtp:append(require("lazy_config").plugin_path .. "/alpha-nvim/")
+vim.opt.rtp:append(require("lazy_config").plugin_path .. "/rainbow-delimiters.nvim/")
 
 require("lazy").setup(
     {
         {
             "nvim-treesitter/nvim-treesitter",
+            lazy = false,
+            branch = 'main',
             build = ':TSUpdate',
             dependencies = {
-                "mrjones2014/nvim-ts-rainbow"
+                -- "mrjonnvim-ts-rainbow"es2014/nvim-ts-rainbow"
             },
             config = require("lazy_config").treesitter_config(lazy_config, opts)
         },
@@ -77,7 +80,7 @@ require("lazy").setup(
                 require('Comment').setup()
             end
         },
-        "mrjones2014/nvim-ts-rainbow",
+        -- "mrjones2014/nvim-ts-rainbow",
         -- "luochen1990/rainbow",
         -- "kyazdani42/nvim-web-devicons",
         -- require("plugins.common"),

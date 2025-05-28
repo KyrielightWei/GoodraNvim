@@ -3,7 +3,7 @@ ZINIT_HOME="${HOME}/.local/share/zinit/zinit.git"
 [ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 source "${ZINIT_HOME}/zinit.zsh"
 
-source ~/.bashrc
+#source ~/.bashrc
 # SELF_DEV_FILE=~/.self_dev_env.sh
 # if [ -f "$SELF_DEV_FILE" ]; then 
 #   source $SELF_DEV_FILE
@@ -46,3 +46,7 @@ zinit snippet PZT::modules/helper/init.zsh
 zinit snippet OMZ::lib/theme-and-appearance.zsh
 zinit snippet OMZ::lib/git.zsh
 zinit snippet OMZ::themes/ys.zsh-theme
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

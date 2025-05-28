@@ -31,6 +31,10 @@ return {
         "GustavoKatel/telescope-asynctasks.nvim",
     },
     {
+        "HiPhish/rainbow-delimiters.nvim",
+        config = require("plugins.ui.config").rainbow_config(LazyPlugin, opts)
+    },
+    {
         "romgrk/barbar.nvim",
         dependencies = {
             "nvim-tree/nvim-web-devicons"
