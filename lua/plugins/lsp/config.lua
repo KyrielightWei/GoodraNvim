@@ -410,7 +410,19 @@ function M.lspconfig_config(LazyPlugin, opts)
                 }
             }
         })
+
+        vim.lsp.config('rust_analyzer', {
+          settings = {
+            ['rust-analyzer'] = {
+              diagnostics = {
+                enable = true;
+              }
+            }
+          }
+        })
         
+        vim.lsp.enable('lua_ls')
+        vim.lsp.enable('rust_analyzer')
         vim.lsp.enable('ccls')
     end
 end
